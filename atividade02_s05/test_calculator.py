@@ -38,7 +38,12 @@ def test_dimin():
     #teste de entradas negativas ----- obsoletas agora que criei os de validacao de valores
 
 #teste de divisão
-    #teste base
+def test_divisao():
+    assert divisao(6, 2) == 3
+def test_divisaoPorZero():
+    with pytest.raises(ValueError):
+        divisao(2, 0)
+
     #teste de entradas negativas
     #teste de divisão por zero
 

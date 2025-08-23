@@ -56,6 +56,7 @@ def calculadora():
 
         escolha = input("Digite o número da operação desejada: ")
 
+        #Escolha de operacao
         try:
             validar_escolha(escolha)
         except ValueError as e:
@@ -66,6 +67,7 @@ def calculadora():
             print("Saindo da calculadora.")
             break
 
+        #Input dos numeros da operacao
         try:
             num1 = float(input("Digite o primeiro número: "))
             num2 = float(input("Digite o segundo número: "))
