@@ -40,14 +40,22 @@ def test_dimin():
 #teste de divisão
 def test_divisao():
     assert divisao(6, 2) == 3
-def test_divisaoPorZero():
+def test_divisaoPorZeroDivisor():
     with pytest.raises(ValueError):
         divisao(2, 0)
-
-    #teste de entradas negativas
-    #teste de divisão por zero
+def test_divisaoporZeroDividendo():
+    try:
+        divisao(0, 2)
+    except Exception as e:
+        if isinstance(e, ValueError):
+            assert False
+def test_divisaoNumeroNegativo():
+    with pytest.raises(ValueError):
+        divisao(-2, 2) #Já tem uma validacao de numeros negativos na funcao de validar
 
 #teste de multiplicação
+def test_multiplicacao():
+    assert multiplicacao(2, 5) == 10
     #teste base
     #teste de entradas negativas
 
