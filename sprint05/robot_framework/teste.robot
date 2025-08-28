@@ -12,6 +12,10 @@ ${id}         1
 
 *** Test Cases ***
 #Sondagem dos test cases para desenvolvimento posterior
+Checkar se a API está funcionando
+    GET request do Ping
+    Response == 200 OK
+    
 Criar token de acesso
     POST request do Auth
     Dados válidos
@@ -25,9 +29,10 @@ Pesquisar booking por ID específica
 Criar booking
     POST request do Booking
     Dados válidos
-    Responde == 200 OK
+    Response == 200 OK
 
-
-
-
+Deletar booking
+    DELETE request do Booking
+    ID válida
+    Response == 200 OK
 
