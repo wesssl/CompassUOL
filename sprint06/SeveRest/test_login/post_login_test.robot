@@ -9,7 +9,7 @@ Resource    ../config/config.robot
 
 Fazer LogIn Estático
     [Arguments]    ${testcase}
-    ${json}       Importar JSON estático    login.json
+    ${json}=       Importar JSON estático    login.json
     
     Create Session    severest    ${BASEURL}
     ${payload}    Set Variable    ${json["${testcase}"]}
@@ -29,12 +29,6 @@ Validar Sucesso no LogIn
 Validar Falha no LogIn
     [Arguments]    ${response}
     Run Keyword And Continue On Failure    Should Be Equal As Integers    ${response.status_code}    401
-
-Importar JSON estático
-    [Arguments]    ${nome_arquivo}
-    ${arquivo}     Get File    ${EXECDIR}/resources/${nome_arquivo}
-    ${data}        Evaluate    json.loads('''${arquivo}''')    json
-    RETURN         ${data}
 
 *** Test Cases ***
 
