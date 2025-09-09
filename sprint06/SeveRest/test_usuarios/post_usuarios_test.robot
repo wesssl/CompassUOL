@@ -8,16 +8,16 @@ Library    FakerLibrary
 
 *** Keywords ***
 
-Cadastro Novo Usuário Dinâmico
+Criar DataMass de Novo Usuário Dinâmico
     ${FIRSTNAME}    First Name
     ${EMAIL}        Email
     ${PASSWORD}     Password
     ${ADM}    Set Variable    "true"
     Create Session    severest    ${BASEURL}
-    ${body}=    Create Dictionary    email=${FIRSTNAME}    email=${EMAIL}    password=${PASSWORD}    administrador=${ADM}
+    ${payload}=    Create Dictionary    nome=${FIRSTNAME}    email=${EMAIL}    password=${PASSWORD}    administrador=${ADM}
+    
+Criar DataMass de Novo Usuário Estático
 
-Cadastro Novo Usuário Estático Válido
-
-Cadastro Novo Usuário Estático Inválido
+Cadastro de Usuário
 
 *** Test Cases ***

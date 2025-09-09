@@ -1,0 +1,26 @@
+{
+    "login_valido":{
+        "email":"fulano@qa.com",
+        "password":"teste"
+    },
+    "login_not_signed":{
+        "email":"randomnotvalid@qa.com",
+        "password":"notvalid"
+    },
+    "login_email_wrong":{
+        "email":"siclano@qa.com",
+        "password":"teste"
+    },
+    "login_email_blank":{
+        "email":"",
+        "password":"teste"
+    },
+    "login_password_wrong":{
+        "email":"fulano@qa.com",
+        "password":"123456"
+    },
+    "login_password_blank":{
+        "email":"fulano@qa.com",
+        "password":""
+    }
+}
