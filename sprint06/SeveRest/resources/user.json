@@ -1,45 +1,24 @@
 {
     "user_valido":{
-        "nome": "Fulano da Silva",
-        "email": "beltrano@qa.com.br",
-        "password": "teste",
-        "administrador": "true"
+
     },
     "user_blank_name":{
-        "nome": "Fulano da Silva",
-        "email": "beltrano@qa.com.br",
-        "password": "teste",
-        "administrador": "true"
+        "nome": ""
     },
     "user_blank_email":{
-        "nome": "Fulano da Silva",
-        "email": "beltrano@qa.com.br",
-        "password": "teste",
-        "administrador": "true"
+        "email": ""
     },
     "user_blank_password":{
-        "nome": "Fulano da Silva",
-        "email": "XXXXXXXXXXXXXXXXXX",
-        "password": "XXXXX",
-        "administrador": "true"
+        "password": ""
     },
     "user_blank_admin":{
-        "nome": "Fulano da Silva",
-        "email": "beltrano@qa.com.br",
-        "password": "teste",
-        "administrador": "true"
+        "administrador": ""
     },
     "user_repeat_email":{
-        "nome": "Fulano da Silva",
-        "email": "beltrano@qa.com.br",
-        "password": "teste",
-        "administrador": "true"
+        "email": "beltrano@qa.com.br"
     },
     "user_gmail":{
-        "nome": "Fulano da Silva",
-        "email": "beltrano@qa.com.br",
-        "password": "teste",
-        "administrador": "true"
+        "email": "beltrano@qa.com.br"
     },
     "user_hotmail":{
         "nome": "Fulano da Silva",
@@ -60,15 +39,9 @@
         "administrador": "true"
     },
     "user_password_less_five":{
-        "nome": "Fulano da Silva",
-        "email": "beltrano@qa.com.br",
-        "password": "teste",
-        "administrador": "true"
+        "password": "123"
     },
     "user_password_more_ten":{
-        "nome": "Fulano da Silva",
-        "email": "beltrano@qa.com.br",
-        "password": "teste",
-        "administrador": "true"
+        "password": "senhamuitissimogrande"
     }
 }
