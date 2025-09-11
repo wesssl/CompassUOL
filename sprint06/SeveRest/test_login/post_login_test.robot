@@ -14,7 +14,8 @@ Fazer LogIn Estático
     Create Session    severest    ${BASEURL}
     ${payload}    Set Variable    ${json["${testcase}"]}
     ${body}=    Set Variable    ${payload}
-    Log To Console    ${body}
+    
+    Log To Console    \n Payload: ${body}
 
     ${response}=    POST On Session    severest    /login    json=${body}    expected_status=any
     Run Keyword If    '${testcase}' == 'login_valido'
@@ -22,7 +23,7 @@ Fazer LogIn Estático
     ...  ELSE IF    '${testcase}' != 'login_valido'
     ...    Validar Falha no LogIn   ${response}
 
-    Log    ${response.json()}    console=True
+    Log    \n Mensagem de Status: ${response.json()}    console=True
     Log To Console    Status code: ${response.status_code}
 Validar Sucesso no LogIn
     [Arguments]    ${response}

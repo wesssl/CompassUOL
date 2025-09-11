@@ -27,13 +27,20 @@ Criar DataMass de Novo Usuário Estatico
     RETURN    ${STATICPAYLOAD}
 
 Criar Novo Usuário
-    [Arguments]    ${testcase}
+    [Arguments]    ${testcase}    ${domain}=${EMPTY}
     ${dynamic}=    Criar DataMass de Novo Usuário Dinâmico
+    
+    IF    '${domain}' != ''
+        ${nome}=    First Name
+        ${email}=    Set Variable    ${nome}${domain}
+        Set to Dictionary    ${dynamic}    email=${email}
+    END
+
     ${static}=     Criar DataMass de Novo Usuário Estatico    ${testcase}
     ${body}=    Copy Dictionary    ${dynamic}
     Set To Dictionary    ${body}    &{static}
 
-    Log To Console    \n${body}
+    Log To Console    \nPayload: ${body}
 
     Create Session    severest    ${BASEURL}
     ${response}=    POST On Session    severest    /usuarios    json=${body}    expected_status=any
@@ -75,12 +82,16 @@ Criar Novo Usuário - Email repetido
     Criar Novo Usuário    user_repeat_email
 
 Criar Novo Usuário - Email Gmail
+    Criar Novo Usuário    user_gmail          @gmail.com
 
 Criar Novo Usuário - Email Hotmail
+    Criar Novo Usuário    user_hotmail        @hotmail.com
 
 Criar Novo Usuário - Email Sem Arroba
+    Criar Novo Usuário    user_wout_arroba    teste.com
 
 Criar Novo Usuário - Email Sem Ponto Com
+    Criar Novo Usuário    user_wout_com       @teste
 
 Criar Novo Usuário - Senha Com Menos De Cinco Caracteres
     Criar Novo Usuário    user_password_less_five

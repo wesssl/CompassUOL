@@ -18,25 +18,15 @@
         "email": "beltrano@qa.com.br"
     },
     "user_gmail":{
-        "email": "beltrano@qa.com.br"
+
     },
     "user_hotmail":{
-        "nome": "Fulano da Silva",
-        "email": "beltrano@qa.com.br",
-        "password": "teste",
-        "administrador": "true"
     },
     "user_wout_arroba":{
-        "nome": "Fulano da Silva",
-        "email": "beltrano@qa.com.br",
-        "password": "teste",
-        "administrador": "true"
+
     },
     "user_wout_com":{
-        "nome": "Fulano da Silva",
-        "email": "beltrano@qa.com.br",
-        "password": "teste",
-        "administrador": "true"
+
     },
     "user_password_less_five":{
         "password": "123"
