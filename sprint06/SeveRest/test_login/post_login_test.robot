@@ -8,7 +8,7 @@ Resource    ../config/config.robot
 *** Keywords ***
 
 Fazer LogIn Estático
-    [Arguments]    ${testcase}
+    [Arguments]    ${testcase}    #define qual o caso de teste, isso vai definir como o keyword irá se comportar
     ${json}=       Importar JSON estático    login.json
     
     Create Session    severest    ${BASEURL}
@@ -18,7 +18,8 @@ Fazer LogIn Estático
     Log To Console    \n Payload: ${body}
 
     ${response}=    POST On Session    severest    /login    json=${body}    expected_status=any
-    Run Keyword If    '${testcase}' == 'login_valido'
+
+    Run Keyword If    '${testcase}' == 'login_valido'    #Validação da resposta
     ...    Validar Sucesso no LogIn    ${response}
     ...  ELSE IF    '${testcase}' != 'login_valido'
     ...    Validar Falha no LogIn   ${response}
