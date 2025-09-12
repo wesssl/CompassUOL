@@ -15,6 +15,5 @@ ${BASEURL}    http://localhost:3000/
 
 Importar JSON estático
     [Arguments]    ${nome_arquivo}
-    ${arquivo}     Get File    ${EXECDIR}/resources/${nome_arquivo}
-    ${data}        Evaluate    json.loads('''${arquivo}''')    json
-    RETURN         ${data}
+    ${data}=     Load JSON From File    ${EXECDIR}/resources/${nome_arquivo}
+    RETURN    ${data}

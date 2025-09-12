@@ -21,23 +21,23 @@ Criar DataMass de Novo Usuário Dinâmico
     RETURN    ${DYNAMICPAYLOAD}
 
 Criar DataMass de Novo Usuário Estatico
-    [Arguments]    ${testcase}
+    [Arguments]    ${testcase}    
     ${json}=       Importar JSON estático    user.json
     ${STATICPAYLOAD}    Set Variable    ${json["${testcase}"]}
     RETURN    ${STATICPAYLOAD}
 
 Criar Novo Usuário
-    [Arguments]    ${testcase}    ${domain}=${EMPTY}
+    [Arguments]    ${testcase}    ${domain}=${EMPTY}    #define qual o caso de teste, isso vai definir como o keyword irá se comportar
     ${dynamic}=    Criar DataMass de Novo Usuário Dinâmico
     
-    IF    '${domain}' != ''
-        ${nome}=    First Name
-        ${email}=    Set Variable    ${nome}${domain}
+    IF    '${domain}' != ''        #se a variável domain está vazio, essa condicional não é usada 
+        ${nome}=    First Name    #define o começo do email como um nome aleatório
+        ${email}=    Set Variable    ${nome}${domain}    #concatena o nome aleatório com o email
         Set to Dictionary    ${dynamic}    email=${email}
     END
 
     ${static}=     Criar DataMass de Novo Usuário Estatico    ${testcase}
-    ${body}=    Copy Dictionary    ${dynamic}
+    ${body}=    Copy Dictionary    ${dynamic}    #substitui os campos estáticos do json para o body do request, mantendo os dinâmicos (aleatórios)
     Set To Dictionary    ${body}    &{static}
 
     Log To Console    \nPayload: ${body}
@@ -45,7 +45,7 @@ Criar Novo Usuário
     Create Session    severest    ${BASEURL}
     ${response}=    POST On Session    severest    /usuarios    json=${body}    expected_status=any
     
-    Run Keyword If    '${testcase}' == 'user_valido'
+    Run Keyword If    '${testcase}' == 'user_valido'     #validação dos testes
     ...    Validar Sucesso No Cadastro    ${response}
     ...  ELSE IF    '${testcase}' != 'user_valido'
     ...    Validar Falha No Cadastro   ${response}

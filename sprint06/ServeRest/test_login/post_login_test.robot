@@ -15,7 +15,7 @@ Fazer LogIn Estático
     ${payload}    Set Variable    ${json["${testcase}"]}
     ${body}=    Set Variable    ${payload}
     
-    Log To Console    \n Payload: ${body}
+    Log To Console    \nPayload: ${body}
 
     ${response}=    POST On Session    severest    /login    json=${body}    expected_status=any
 
@@ -24,7 +24,7 @@ Fazer LogIn Estático
     ...  ELSE IF    '${testcase}' != 'login_valido'
     ...    Validar Falha no LogIn   ${response}
 
-    Log    \n Mensagem de Status: ${response.json()}    console=True
+    Log    Mensagem de Status: ${response.json()}    console=True
     Log To Console    Status code: ${response.status_code}
 Validar Sucesso no LogIn
     [Arguments]    ${response}

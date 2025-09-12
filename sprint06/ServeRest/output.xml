@@ -1,0 +1,3381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.7 on darwin)" generated="2025-09-12T12:46:33.485347" rpa="false" schemaversion="5">
+<suite id="s1" name="ServeRest" source="/Users/wesleylima/Documents/CompassUOL/sprint06/ServeRest">
+<suite id="s1-s1" name="Resources" source="/Users/wesleylima/Documents/CompassUOL/sprint06/ServeRest/resources">
+<suite id="s1-s1-s1" name="Token" source="/Users/wesleylima/Documents/CompassUOL/sprint06/ServeRest/resources/token.robot">
+<test id="s1-s1-s1-t1" name="Teste de Token" line="29">
+<kw name="Gerar Novo Token">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.636665" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.636599" elapsed="0.000147"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.636892" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<var>${body}</var>
+<arg>email=fulano@qa.com</arg>
+<arg>password=teste</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.636803" elapsed="0.000099"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.649876" level="INFO">POST Request : url=http://localhost:3000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '47', 'Content-Type': 'application/json'} 
+ body=b'{"email": "fulano@qa.com", "password": "teste"}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.649943" level="INFO">POST Response : url=http://localhost:3000/login 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '265', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Login realizado com sucesso",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzU3NjkxOTkzLCJleHAiOjE3NTc2OTI1OTN9.I2rL2TmU7ztCg6XbcnFwjFBMJOXF_B04_ceX-mF7a78"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.650025" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/login</arg>
+<arg>json=${body}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.636939" elapsed="0.013182"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.650573" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.650280" elapsed="0.000323"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.650840" level="INFO">${json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzU3NjkxOTkzLCJleHAiOjE3NTc...</msg>
+<var>${json}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.650658" elapsed="0.000193"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.651044" level="INFO">${authorization} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzU3NjkxOTkzLCJleHAiOjE3NTc2OTI1OTN9.I2rL2TmU7ztCg6XbcnFwjFBMJOXF_B04_ceX-mF7a78</msg>
+<var>${authorization}</var>
+<arg>${json['authorization']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.650896" elapsed="0.000158"/>
+</kw>
+<kw name="Split String" owner="String">
+<msg time="2025-09-12T12:46:33.651161" level="INFO">${parts} = ['Bearer', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzU3NjkxOTkzLCJleHAiOjE3NTc2OTI1OTN9.I2rL2TmU7ztCg6XbcnFwjFBMJOXF_B04_ceX-mF7a78']</msg>
+<var>${parts}</var>
+<arg>${authorization}</arg>
+<arg>${SPACE}</arg>
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.651091" elapsed="0.000079"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.651410" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzU3NjkxOTkzLCJleHAiOjE3NTc2OTI1OTN9.I2rL2TmU7ztCg6XbcnFwjFBMJOXF_B04_ceX-mF7a78</msg>
+<var>${TOKEN}</var>
+<arg>${parts[1]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.651207" elapsed="0.000219"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.651576" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzU3NjkxOTkzLCJleHAiOjE3NTc2OTI1OTN9.I2rL2TmU7ztCg6XbcnFwjFBMJOXF_B04_ceX-mF7a78</msg>
+<arg>${TOKEN}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.651484" elapsed="0.000108"/>
+</kw>
+<return>
+<value>${TOKEN}</value>
+<status status="PASS" start="2025-09-12T12:46:33.651614" elapsed="0.000029"/>
+</return>
+<status status="PASS" start="2025-09-12T12:46:33.636169" elapsed="0.015527"/>
+</kw>
+<kw name="Log do Bearer Token">
+<kw name="Gerar Novo Token">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.652080" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.652006" elapsed="0.000167"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.652310" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<var>${body}</var>
+<arg>email=fulano@qa.com</arg>
+<arg>password=teste</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.652231" elapsed="0.000088"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.656136" level="INFO">POST Request : url=http://localhost:3000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '47', 'Content-Type': 'application/json'} 
+ body=b'{"email": "fulano@qa.com", "password": "teste"}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.656176" level="INFO">POST Response : url=http://localhost:3000/login 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '265', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Login realizado com sucesso",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzU3NjkxOTkzLCJleHAiOjE3NTc2OTI1OTN9.I2rL2TmU7ztCg6XbcnFwjFBMJOXF_B04_ceX-mF7a78"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.656269" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/login</arg>
+<arg>json=${body}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.652355" elapsed="0.003924"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.656535" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.656348" elapsed="0.000209"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.656744" level="INFO">${json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzU3NjkxOTkzLCJleHAiOjE3NTc...</msg>
+<var>${json}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.656595" elapsed="0.000158"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.656920" level="INFO">${authorization} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzU3NjkxOTkzLCJleHAiOjE3NTc2OTI1OTN9.I2rL2TmU7ztCg6XbcnFwjFBMJOXF_B04_ceX-mF7a78</msg>
+<var>${authorization}</var>
+<arg>${json['authorization']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.656789" elapsed="0.000141"/>
+</kw>
+<kw name="Split String" owner="String">
+<msg time="2025-09-12T12:46:33.657026" level="INFO">${parts} = ['Bearer', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzU3NjkxOTkzLCJleHAiOjE3NTc2OTI1OTN9.I2rL2TmU7ztCg6XbcnFwjFBMJOXF_B04_ceX-mF7a78']</msg>
+<var>${parts}</var>
+<arg>${authorization}</arg>
+<arg>${SPACE}</arg>
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.656964" elapsed="0.000071"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.657210" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzU3NjkxOTkzLCJleHAiOjE3NTc2OTI1OTN9.I2rL2TmU7ztCg6XbcnFwjFBMJOXF_B04_ceX-mF7a78</msg>
+<var>${TOKEN}</var>
+<arg>${parts[1]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.657066" elapsed="0.000152"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.657319" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzU3NjkxOTkzLCJleHAiOjE3NTc2OTI1OTN9.I2rL2TmU7ztCg6XbcnFwjFBMJOXF_B04_ceX-mF7a78</msg>
+<arg>${TOKEN}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.657253" elapsed="0.000078"/>
+</kw>
+<return>
+<value>${TOKEN}</value>
+<status status="PASS" start="2025-09-12T12:46:33.657348" elapsed="0.000019"/>
+</return>
+<msg time="2025-09-12T12:46:33.657409" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzU3NjkxOTkzLCJleHAiOjE3NTc2OTI1OTN9.I2rL2TmU7ztCg6XbcnFwjFBMJOXF_B04_ceX-mF7a78</msg>
+<var>${TOKEN}</var>
+<status status="PASS" start="2025-09-12T12:46:33.651929" elapsed="0.005487"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${TOKEN}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.657448" elapsed="0.000055"/>
+</kw>
+<status status="PASS" start="2025-09-12T12:46:33.651805" elapsed="0.005719"/>
+</kw>
+<status status="PASS" start="2025-09-12T12:46:33.635892" elapsed="0.021690"/>
+</test>
+<status status="PASS" start="2025-09-12T12:46:33.496624" elapsed="0.161186"/>
+</suite>
+<status status="PASS" start="2025-09-12T12:46:33.496267" elapsed="0.161720"/>
+</suite>
+<suite id="s1-s2" name="Test Login" source="/Users/wesleylima/Documents/CompassUOL/sprint06/ServeRest/test_login">
+<suite id="s1-s2-s1" name="Post Login Test" source="/Users/wesleylima/Documents/CompassUOL/sprint06/ServeRest/test_login/post_login_test.robot">
+<test id="s1-s2-s1-t1" name="Teste de LogIn Válido Estático - Caso Base" line="39">
+<kw name="Fazer LogIn Estático">
+<kw name="Importar JSON estático" owner="config">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-09-12T12:46:33.660430" level="INFO">${data} = {'login_valido': {'email': 'fulano@qa.com', 'password': 'teste'}, 'login_not_signed': {'email': 'randomnotvalid@qa.com', 'password': 'notvalid'}, 'login_email_wrong': {'email': 'siclano@qa.com', 'pass...</msg>
+<var>${data}</var>
+<arg>${EXECDIR}/resources/${nome_arquivo}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.660092" elapsed="0.000349"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-09-12T12:46:33.660461" elapsed="0.000012"/>
+</return>
+<msg time="2025-09-12T12:46:33.660517" level="INFO">${json} = {'login_valido': {'email': 'fulano@qa.com', 'password': 'teste'}, 'login_not_signed': {'email': 'randomnotvalid@qa.com', 'password': 'notvalid'}, 'login_email_wrong': {'email': 'siclano@qa.com', 'pass...</msg>
+<var>${json}</var>
+<arg>login.json</arg>
+<status status="PASS" start="2025-09-12T12:46:33.660017" elapsed="0.000509"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.660606" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.660562" elapsed="0.000098"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.660862" level="INFO">${payload} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<var>${payload}</var>
+<arg>${json["${testcase}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.660695" elapsed="0.000176"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.660949" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<var>${body}</var>
+<arg>${payload}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.660906" elapsed="0.000051"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nPayload: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.660991" elapsed="0.000057"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.664842" level="INFO">POST Request : url=http://localhost:3000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '47', 'Content-Type': 'application/json'} 
+ body=b'{"email": "fulano@qa.com", "password": "teste"}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.664886" level="INFO">POST Response : url=http://localhost:3000/login 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '265', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Login realizado com sucesso",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzU3NjkxOTkzLCJleHAiOjE3NTc2OTI1OTN9.I2rL2TmU7ztCg6XbcnFwjFBMJOXF_B04_ceX-mF7a78"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.665004" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/login</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.661081" elapsed="0.003935"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Validar Sucesso no LogIn">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.665648" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.665483" elapsed="0.000187"/>
+</kw>
+<arg>Should Be Equal As Integers</arg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.665432" elapsed="0.000259"/>
+</kw>
+<arg>${response}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.665316" elapsed="0.000397"/>
+</kw>
+<arg>'${testcase}' == 'login_valido'</arg>
+<arg>Validar Sucesso no LogIn</arg>
+<arg>${response}</arg>
+<arg>ELSE IF</arg>
+<arg>'${testcase}' != 'login_valido'</arg>
+<arg>Validar Falha no LogIn</arg>
+<arg>${response}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.665118" elapsed="0.000612"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.665964" level="INFO">Mensagem de Status: {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzU3NjkxOTkzLCJleHAiOjE3NTc2OTI1OTN9.I2rL2TmU7ztCg6XbcnFwjFBMJOXF_B04_ceX-mF7a78'}</msg>
+<arg>Mensagem de Status: ${response.json()}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.665775" elapsed="0.000224"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.666037" elapsed="0.000143"/>
+</kw>
+<arg>login_valido</arg>
+<status status="PASS" start="2025-09-12T12:46:33.659913" elapsed="0.006287"/>
+</kw>
+<status status="PASS" start="2025-09-12T12:46:33.659750" elapsed="0.006512"/>
+</test>
+<test id="s1-s2-s1-t2" name="Teste de LogIn Inválido Estático - Não Cadastrado" line="42">
+<kw name="Fazer LogIn Estático">
+<kw name="Importar JSON estático" owner="config">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-09-12T12:46:33.666822" level="INFO">${data} = {'login_valido': {'email': 'fulano@qa.com', 'password': 'teste'}, 'login_not_signed': {'email': 'randomnotvalid@qa.com', 'password': 'notvalid'}, 'login_email_wrong': {'email': 'siclano@qa.com', 'pass...</msg>
+<var>${data}</var>
+<arg>${EXECDIR}/resources/${nome_arquivo}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.666662" elapsed="0.000170"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-09-12T12:46:33.666851" elapsed="0.000018"/>
+</return>
+<msg time="2025-09-12T12:46:33.666912" level="INFO">${json} = {'login_valido': {'email': 'fulano@qa.com', 'password': 'teste'}, 'login_not_signed': {'email': 'randomnotvalid@qa.com', 'password': 'notvalid'}, 'login_email_wrong': {'email': 'siclano@qa.com', 'pass...</msg>
+<var>${json}</var>
+<arg>login.json</arg>
+<status status="PASS" start="2025-09-12T12:46:33.666586" elapsed="0.000334"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.666996" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.666955" elapsed="0.000101"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.667233" level="INFO">${payload} = {'email': 'randomnotvalid@qa.com', 'password': 'notvalid'}</msg>
+<var>${payload}</var>
+<arg>${json["${testcase}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.667092" elapsed="0.000149"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.667313" level="INFO">${body} = {'email': 'randomnotvalid@qa.com', 'password': 'notvalid'}</msg>
+<var>${body}</var>
+<arg>${payload}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.667273" elapsed="0.000047"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nPayload: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.667351" elapsed="0.000047"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.672991" level="INFO">POST Request : url=http://localhost:3000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '58', 'Content-Type': 'application/json'} 
+ body=b'{"email": "randomnotvalid@qa.com", "password": "notvalid"}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.673056" level="INFO">POST Response : url=http://localhost:3000/login 
+ status=401, reason=Unauthorized 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '48', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Email e/ou senha inválidos"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.673158" level="INFO">${response} = &lt;Response [401]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/login</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.667434" elapsed="0.005742"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Validar Falha no LogIn">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.673798" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>401</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.673628" elapsed="0.000191"/>
+</kw>
+<arg>Should Be Equal As Integers</arg>
+<arg>${response.status_code}</arg>
+<arg>401</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.673582" elapsed="0.000256"/>
+</kw>
+<arg>${response}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.673468" elapsed="0.000389"/>
+</kw>
+<arg>'${testcase}' == 'login_valido'</arg>
+<arg>Validar Sucesso no LogIn</arg>
+<arg>${response}</arg>
+<arg>ELSE IF</arg>
+<arg>'${testcase}' != 'login_valido'</arg>
+<arg>Validar Falha no LogIn</arg>
+<arg>${response}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.673282" elapsed="0.000588"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.674087" level="INFO">Mensagem de Status: {'message': 'Email e/ou senha inválidos'}</msg>
+<arg>Mensagem de Status: ${response.json()}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.673908" elapsed="0.000241"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.674190" elapsed="0.000142"/>
+</kw>
+<arg>login_not_signed</arg>
+<status status="PASS" start="2025-09-12T12:46:33.666487" elapsed="0.007864"/>
+</kw>
+<status status="PASS" start="2025-09-12T12:46:33.666343" elapsed="0.008058"/>
+</test>
+<test id="s1-s2-s1-t3" name="Teste de LogIn Inválido Estático - Email Errado" line="45">
+<kw name="Fazer LogIn Estático">
+<kw name="Importar JSON estático" owner="config">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-09-12T12:46:33.674906" level="INFO">${data} = {'login_valido': {'email': 'fulano@qa.com', 'password': 'teste'}, 'login_not_signed': {'email': 'randomnotvalid@qa.com', 'password': 'notvalid'}, 'login_email_wrong': {'email': 'siclano@qa.com', 'pass...</msg>
+<var>${data}</var>
+<arg>${EXECDIR}/resources/${nome_arquivo}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.674764" elapsed="0.000151"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-09-12T12:46:33.674931" elapsed="0.000014"/>
+</return>
+<msg time="2025-09-12T12:46:33.674983" level="INFO">${json} = {'login_valido': {'email': 'fulano@qa.com', 'password': 'teste'}, 'login_not_signed': {'email': 'randomnotvalid@qa.com', 'password': 'notvalid'}, 'login_email_wrong': {'email': 'siclano@qa.com', 'pass...</msg>
+<var>${json}</var>
+<arg>login.json</arg>
+<status status="PASS" start="2025-09-12T12:46:33.674694" elapsed="0.000296"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.675056" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.675020" elapsed="0.000089"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.675279" level="INFO">${payload} = {'email': 'siclano@qa.com', 'password': 'teste'}</msg>
+<var>${payload}</var>
+<arg>${json["${testcase}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.675141" elapsed="0.000146"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.675358" level="INFO">${body} = {'email': 'siclano@qa.com', 'password': 'teste'}</msg>
+<var>${body}</var>
+<arg>${payload}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.675317" elapsed="0.000049"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nPayload: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.675396" elapsed="0.000044"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.678497" level="INFO">POST Request : url=http://localhost:3000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '48', 'Content-Type': 'application/json'} 
+ body=b'{"email": "siclano@qa.com", "password": "teste"}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.678529" level="INFO">POST Response : url=http://localhost:3000/login 
+ status=401, reason=Unauthorized 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '48', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Email e/ou senha inválidos"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.678574" level="INFO">${response} = &lt;Response [401]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/login</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.675476" elapsed="0.003109"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Validar Falha no LogIn">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.679243" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>401</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.679090" elapsed="0.000173"/>
+</kw>
+<arg>Should Be Equal As Integers</arg>
+<arg>${response.status_code}</arg>
+<arg>401</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.679043" elapsed="0.000238"/>
+</kw>
+<arg>${response}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.678932" elapsed="0.000366"/>
+</kw>
+<arg>'${testcase}' == 'login_valido'</arg>
+<arg>Validar Sucesso no LogIn</arg>
+<arg>${response}</arg>
+<arg>ELSE IF</arg>
+<arg>'${testcase}' != 'login_valido'</arg>
+<arg>Validar Falha no LogIn</arg>
+<arg>${response}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.678757" elapsed="0.000553"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.679579" level="INFO">Mensagem de Status: {'message': 'Email e/ou senha inválidos'}</msg>
+<arg>Mensagem de Status: ${response.json()}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.679346" elapsed="0.000275"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.679663" elapsed="0.000147"/>
+</kw>
+<arg>login_email_wrong</arg>
+<status status="PASS" start="2025-09-12T12:46:33.674603" elapsed="0.005227"/>
+</kw>
+<status status="PASS" start="2025-09-12T12:46:33.674466" elapsed="0.005416"/>
+</test>
+<test id="s1-s2-s1-t4" name="Teste de LogIn Inválido Estático - Email Faltando" line="48">
+<kw name="Fazer LogIn Estático">
+<kw name="Importar JSON estático" owner="config">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-09-12T12:46:33.680356" level="INFO">${data} = {'login_valido': {'email': 'fulano@qa.com', 'password': 'teste'}, 'login_not_signed': {'email': 'randomnotvalid@qa.com', 'password': 'notvalid'}, 'login_email_wrong': {'email': 'siclano@qa.com', 'pass...</msg>
+<var>${data}</var>
+<arg>${EXECDIR}/resources/${nome_arquivo}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.680225" elapsed="0.000140"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-09-12T12:46:33.680380" elapsed="0.000013"/>
+</return>
+<msg time="2025-09-12T12:46:33.680429" level="INFO">${json} = {'login_valido': {'email': 'fulano@qa.com', 'password': 'teste'}, 'login_not_signed': {'email': 'randomnotvalid@qa.com', 'password': 'notvalid'}, 'login_email_wrong': {'email': 'siclano@qa.com', 'pass...</msg>
+<var>${json}</var>
+<arg>login.json</arg>
+<status status="PASS" start="2025-09-12T12:46:33.680158" elapsed="0.000279"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.680502" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.680468" elapsed="0.000110"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.680758" level="INFO">${payload} = {'email': '', 'password': 'teste'}</msg>
+<var>${payload}</var>
+<arg>${json["${testcase}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.680611" elapsed="0.000156"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.680839" level="INFO">${body} = {'email': '', 'password': 'teste'}</msg>
+<var>${body}</var>
+<arg>${payload}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.680799" elapsed="0.000048"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nPayload: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.680875" elapsed="0.000045"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.684318" level="INFO">POST Request : url=http://localhost:3000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '34', 'Content-Type': 'application/json'} 
+ body=b'{"email": "", "password": "teste"}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.684349" level="INFO">POST Response : url=http://localhost:3000/login 
+ status=400, reason=Bad Request 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '50', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "email": "email não pode ficar em branco"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.684391" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/login</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.680958" elapsed="0.003442"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Validar Falha no LogIn">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.684891" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2025-09-12T12:46:33.684966" level="FAIL">400 != 401</msg>
+<arg>${response.status_code}</arg>
+<arg>401</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="FAIL" start="2025-09-12T12:46:33.684740" elapsed="0.000751">400 != 401</status>
+</kw>
+<arg>Should Be Equal As Integers</arg>
+<arg>${response.status_code}</arg>
+<arg>401</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="FAIL" start="2025-09-12T12:46:33.684697" elapsed="0.000834">400 != 401</status>
+</kw>
+<arg>${response}</arg>
+<status status="FAIL" start="2025-09-12T12:46:33.684602" elapsed="0.001009">400 != 401</status>
+</kw>
+<arg>'${testcase}' == 'login_valido'</arg>
+<arg>Validar Sucesso no LogIn</arg>
+<arg>${response}</arg>
+<arg>ELSE IF</arg>
+<arg>'${testcase}' != 'login_valido'</arg>
+<arg>Validar Falha no LogIn</arg>
+<arg>${response}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-09-12T12:46:33.684461" elapsed="0.001168">400 != 401</status>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.685885" level="INFO">Mensagem de Status: {'email': 'email não pode ficar em branco'}</msg>
+<arg>Mensagem de Status: ${response.json()}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.685678" elapsed="0.000240"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.685962" elapsed="0.000144"/>
+</kw>
+<arg>login_email_blank</arg>
+<status status="FAIL" start="2025-09-12T12:46:33.680078" elapsed="0.006067">400 != 401</status>
+</kw>
+<status status="FAIL" start="2025-09-12T12:46:33.679951" elapsed="0.006293">400 != 401</status>
+</test>
+<test id="s1-s2-s1-t5" name="Teste de LogIn Inválido Estático - Senha Errada" line="51">
+<kw name="Fazer LogIn Estático">
+<kw name="Importar JSON estático" owner="config">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-09-12T12:46:33.686816" level="INFO">${data} = {'login_valido': {'email': 'fulano@qa.com', 'password': 'teste'}, 'login_not_signed': {'email': 'randomnotvalid@qa.com', 'password': 'notvalid'}, 'login_email_wrong': {'email': 'siclano@qa.com', 'pass...</msg>
+<var>${data}</var>
+<arg>${EXECDIR}/resources/${nome_arquivo}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.686655" elapsed="0.000171"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-09-12T12:46:33.686846" elapsed="0.000014"/>
+</return>
+<msg time="2025-09-12T12:46:33.686901" level="INFO">${json} = {'login_valido': {'email': 'fulano@qa.com', 'password': 'teste'}, 'login_not_signed': {'email': 'randomnotvalid@qa.com', 'password': 'notvalid'}, 'login_email_wrong': {'email': 'siclano@qa.com', 'pass...</msg>
+<var>${json}</var>
+<arg>login.json</arg>
+<status status="PASS" start="2025-09-12T12:46:33.686578" elapsed="0.000331"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.687011" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.686952" elapsed="0.000156"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.687302" level="INFO">${payload} = {'email': 'fulano@qa.com', 'password': '123456'}</msg>
+<var>${payload}</var>
+<arg>${json["${testcase}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.687148" elapsed="0.000163"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.687389" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': '123456'}</msg>
+<var>${body}</var>
+<arg>${payload}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.687346" elapsed="0.000051"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nPayload: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.687429" elapsed="0.000055"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.690933" level="INFO">POST Request : url=http://localhost:3000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '48', 'Content-Type': 'application/json'} 
+ body=b'{"email": "fulano@qa.com", "password": "123456"}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.690975" level="INFO">POST Response : url=http://localhost:3000/login 
+ status=401, reason=Unauthorized 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '48', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Email e/ou senha inválidos"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.691080" level="INFO">${response} = &lt;Response [401]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/login</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.687515" elapsed="0.003575"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Validar Falha no LogIn">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.691689" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>401</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.691529" elapsed="0.000184"/>
+</kw>
+<arg>Should Be Equal As Integers</arg>
+<arg>${response.status_code}</arg>
+<arg>401</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.691482" elapsed="0.000284"/>
+</kw>
+<arg>${response}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.691381" elapsed="0.000419"/>
+</kw>
+<arg>'${testcase}' == 'login_valido'</arg>
+<arg>Validar Sucesso no LogIn</arg>
+<arg>${response}</arg>
+<arg>ELSE IF</arg>
+<arg>'${testcase}' != 'login_valido'</arg>
+<arg>Validar Falha no LogIn</arg>
+<arg>${response}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.691188" elapsed="0.000627"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.692059" level="INFO">Mensagem de Status: {'message': 'Email e/ou senha inválidos'}</msg>
+<arg>Mensagem de Status: ${response.json()}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.691862" elapsed="0.000227"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.692127" elapsed="0.000144"/>
+</kw>
+<arg>login_password_wrong</arg>
+<status status="PASS" start="2025-09-12T12:46:33.686475" elapsed="0.005815"/>
+</kw>
+<status status="PASS" start="2025-09-12T12:46:33.686325" elapsed="0.006019"/>
+</test>
+<test id="s1-s2-s1-t6" name="Teste de LogIn Inválido Estático - Senha Faltando" line="54">
+<kw name="Fazer LogIn Estático">
+<kw name="Importar JSON estático" owner="config">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-09-12T12:46:33.692875" level="INFO">${data} = {'login_valido': {'email': 'fulano@qa.com', 'password': 'teste'}, 'login_not_signed': {'email': 'randomnotvalid@qa.com', 'password': 'notvalid'}, 'login_email_wrong': {'email': 'siclano@qa.com', 'pass...</msg>
+<var>${data}</var>
+<arg>${EXECDIR}/resources/${nome_arquivo}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.692726" elapsed="0.000159"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-09-12T12:46:33.692902" elapsed="0.000017"/>
+</return>
+<msg time="2025-09-12T12:46:33.692959" level="INFO">${json} = {'login_valido': {'email': 'fulano@qa.com', 'password': 'teste'}, 'login_not_signed': {'email': 'randomnotvalid@qa.com', 'password': 'notvalid'}, 'login_email_wrong': {'email': 'siclano@qa.com', 'pass...</msg>
+<var>${json}</var>
+<arg>login.json</arg>
+<status status="PASS" start="2025-09-12T12:46:33.692650" elapsed="0.000316"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.693043" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.693001" elapsed="0.000099"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.693285" level="INFO">${payload} = {'email': 'fulano@qa.com', 'password': ''}</msg>
+<var>${payload}</var>
+<arg>${json["${testcase}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.693138" elapsed="0.000156"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.693371" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': ''}</msg>
+<var>${body}</var>
+<arg>${payload}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.693328" elapsed="0.000052"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nPayload: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.693412" elapsed="0.000047"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.696552" level="INFO">POST Request : url=http://localhost:3000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '42', 'Content-Type': 'application/json'} 
+ body=b'{"email": "fulano@qa.com", "password": ""}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.696587" level="INFO">POST Response : url=http://localhost:3000/login 
+ status=400, reason=Bad Request 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '56', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "password": "password não pode ficar em branco"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.696634" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/login</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.693493" elapsed="0.003152"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Validar Falha no LogIn">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.697137" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2025-09-12T12:46:33.697177" level="FAIL">400 != 401</msg>
+<arg>${response.status_code}</arg>
+<arg>401</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="FAIL" start="2025-09-12T12:46:33.696999" elapsed="0.000213">400 != 401</status>
+</kw>
+<arg>Should Be Equal As Integers</arg>
+<arg>${response.status_code}</arg>
+<arg>401</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="FAIL" start="2025-09-12T12:46:33.696958" elapsed="0.000278">400 != 401</status>
+</kw>
+<arg>${response}</arg>
+<status status="FAIL" start="2025-09-12T12:46:33.696860" elapsed="0.000412">400 != 401</status>
+</kw>
+<arg>'${testcase}' == 'login_valido'</arg>
+<arg>Validar Sucesso no LogIn</arg>
+<arg>${response}</arg>
+<arg>ELSE IF</arg>
+<arg>'${testcase}' != 'login_valido'</arg>
+<arg>Validar Falha no LogIn</arg>
+<arg>${response}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-09-12T12:46:33.696719" elapsed="0.000588">400 != 401</status>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.697679" level="INFO">Mensagem de Status: {'password': 'password não pode ficar em branco'}</msg>
+<arg>Mensagem de Status: ${response.json()}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.697358" elapsed="0.000354"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.697802" elapsed="0.000164"/>
+</kw>
+<arg>login_password_blank</arg>
+<status status="FAIL" start="2025-09-12T12:46:33.692559" elapsed="0.005450">400 != 401</status>
+</kw>
+<status status="FAIL" start="2025-09-12T12:46:33.692411" elapsed="0.005674">400 != 401</status>
+</test>
+<status status="FAIL" start="2025-09-12T12:46:33.658559" elapsed="0.039638"/>
+</suite>
+<status status="FAIL" start="2025-09-12T12:46:33.658104" elapsed="0.040260"/>
+</suite>
+<suite id="s1-s3" name="Test Usuarios" source="/Users/wesleylima/Documents/CompassUOL/sprint06/ServeRest/test_usuarios">
+<suite id="s1-s3-s1" name="Post Usuarios Test" source="/Users/wesleylima/Documents/CompassUOL/sprint06/ServeRest/test_usuarios/post_usuarios_test.robot">
+<test id="s1-s3-s1-t1" name="Criar Novo Usuário - Caso Base" line="66">
+<kw name="Criar Novo Usuário">
+<kw name="Criar DataMass de Novo Usuário Dinâmico">
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.700224" level="INFO">${FIRSTNAME} = Teresa</msg>
+<var>${FIRSTNAME}</var>
+<status status="PASS" start="2025-09-12T12:46:33.700111" elapsed="0.000122"/>
+</kw>
+<kw name="Email" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.700420" level="INFO">${EMAIL} = timothydawson@example.net</msg>
+<var>${EMAIL}</var>
+<status status="PASS" start="2025-09-12T12:46:33.700265" elapsed="0.000162"/>
+</kw>
+<kw name="Password" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.700513" level="INFO">${PASSWORD} = y^^5XW!pGW</msg>
+<var>${PASSWORD}</var>
+<doc>Generate a random password of the specified ``length``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.700457" elapsed="0.000063"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.700588" level="INFO">${list} = ['true', 'false']</msg>
+<var>${list}</var>
+<arg>true</arg>
+<arg>false</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.700549" elapsed="0.000046"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.700816" level="INFO">${ADM} = true</msg>
+<var>${ADM}</var>
+<arg>${list}</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.700626" elapsed="0.000199"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.700972" level="INFO">${DYNAMICPAYLOAD} = {'nome': 'Teresa', 'email': 'timothydawson@example.net', 'password': 'y^^5XW!pGW', 'administrador': 'true'}</msg>
+<var>${DYNAMICPAYLOAD}</var>
+<arg>nome=${FIRSTNAME}</arg>
+<arg>email=${EMAIL}</arg>
+<arg>password=${PASSWORD}</arg>
+<arg>administrador=${ADM}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.700863" elapsed="0.000118"/>
+</kw>
+<return>
+<value>${DYNAMICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.701001" elapsed="0.000013"/>
+</return>
+<msg time="2025-09-12T12:46:33.701055" level="INFO">${dynamic} = {'nome': 'Teresa', 'email': 'timothydawson@example.net', 'password': 'y^^5XW!pGW', 'administrador': 'true'}</msg>
+<var>${dynamic}</var>
+<status status="PASS" start="2025-09-12T12:46:33.700048" elapsed="0.001015"/>
+</kw>
+<if>
+<branch type="IF" condition="'${domain}' != ''">
+<kw name="First Name" owner="FakerLibrary">
+<var>${nome}</var>
+<status status="NOT RUN" start="2025-09-12T12:46:33.701151" elapsed="0.000006"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${email}</var>
+<arg>${nome}${domain}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-09-12T12:46:33.701185" elapsed="0.000006"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${dynamic}</arg>
+<arg>email=${email}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="NOT RUN" start="2025-09-12T12:46:33.701223" elapsed="0.000006"/>
+</kw>
+<status status="NOT RUN" start="2025-09-12T12:46:33.701091" elapsed="0.000147"/>
+</branch>
+<status status="PASS" start="2025-09-12T12:46:33.701081" elapsed="0.000166"/>
+</if>
+<kw name="Criar DataMass de Novo Usuário Estatico">
+<kw name="Importar JSON estático" owner="config">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-09-12T12:46:33.702033" level="INFO">${data} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${data}</var>
+<arg>${EXECDIR}/resources/${nome_arquivo}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.701722" elapsed="0.000321"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-09-12T12:46:33.702058" elapsed="0.000009"/>
+</return>
+<msg time="2025-09-12T12:46:33.702104" level="INFO">${json} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${json}</var>
+<arg>user.json</arg>
+<status status="PASS" start="2025-09-12T12:46:33.701650" elapsed="0.000461"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.702290" level="INFO">${STATICPAYLOAD} = {}</msg>
+<var>${STATICPAYLOAD}</var>
+<arg>${json["${testcase}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.702142" elapsed="0.000156"/>
+</kw>
+<return>
+<value>${STATICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.702312" elapsed="0.000008"/>
+</return>
+<msg time="2025-09-12T12:46:33.702355" level="INFO">${static} = {}</msg>
+<var>${static}</var>
+<arg>${testcase}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.701287" elapsed="0.001075"/>
+</kw>
+<kw name="Copy Dictionary" owner="Collections">
+<msg time="2025-09-12T12:46:33.702454" level="INFO">${body} = {'nome': 'Teresa', 'email': 'timothydawson@example.net', 'password': 'y^^5XW!pGW', 'administrador': 'true'}</msg>
+<var>${body}</var>
+<arg>${dynamic}</arg>
+<doc>Returns a copy of the given dictionary.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.702393" elapsed="0.000069"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${body}</arg>
+<arg>&amp;{static}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.702495" elapsed="0.000055"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nPayload: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.702583" elapsed="0.000049"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.702751" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.702670" elapsed="0.000143"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.707299" level="INFO">POST Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '107', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Teresa", "email": "timothydawson@example.net", "password": "y^^5XW!pGW", "administrador": "true"}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.707341" level="INFO">POST Response : url=http://localhost:3000/usuarios 
+ status=201, reason=Created 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '82', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "ydAcwuns10B7STYU"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.707448" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/usuarios</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.702911" elapsed="0.004549"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Validar Sucesso No Cadastro">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.707983" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.707845" elapsed="0.000158"/>
+</kw>
+<arg>Should Be Equal As Integers</arg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.707805" elapsed="0.000216"/>
+</kw>
+<arg>${response}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.707713" elapsed="0.000325"/>
+</kw>
+<arg>'${testcase}' == 'user_valido'</arg>
+<arg>Validar Sucesso No Cadastro</arg>
+<arg>${response}</arg>
+<arg>ELSE IF</arg>
+<arg>'${testcase}' != 'user_valido'</arg>
+<arg>Validar Falha No Cadastro</arg>
+<arg>${response}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.707560" elapsed="0.000490"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.708240" level="INFO">Mensagem de status: {'message': 'Cadastro realizado com sucesso', '_id': 'ydAcwuns10B7STYU'}</msg>
+<arg>Mensagem de status: ${response.json()}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.708086" elapsed="0.000182"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.708309" elapsed="0.000145"/>
+</kw>
+<arg>user_valido</arg>
+<status status="PASS" start="2025-09-12T12:46:33.699847" elapsed="0.008630"/>
+</kw>
+<status status="PASS" start="2025-09-12T12:46:33.699675" elapsed="0.008859"/>
+</test>
+<test id="s1-s3-s1-t2" name="Criar Novo Usuário - Sem nome" line="69">
+<kw name="Criar Novo Usuário">
+<kw name="Criar DataMass de Novo Usuário Dinâmico">
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.709138" level="INFO">${FIRSTNAME} = Amy</msg>
+<var>${FIRSTNAME}</var>
+<status status="PASS" start="2025-09-12T12:46:33.709054" elapsed="0.000092"/>
+</kw>
+<kw name="Email" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.709272" level="INFO">${EMAIL} = kwells@example.com</msg>
+<var>${EMAIL}</var>
+<status status="PASS" start="2025-09-12T12:46:33.709174" elapsed="0.000106"/>
+</kw>
+<kw name="Password" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.709371" level="INFO">${PASSWORD} = UtR&amp;sAR^(7</msg>
+<var>${PASSWORD}</var>
+<doc>Generate a random password of the specified ``length``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.709310" elapsed="0.000069"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.709442" level="INFO">${list} = ['true', 'false']</msg>
+<var>${list}</var>
+<arg>true</arg>
+<arg>false</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.709408" elapsed="0.000040"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.709575" level="INFO">${ADM} = false</msg>
+<var>${ADM}</var>
+<arg>${list}</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.709478" elapsed="0.000105"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.709717" level="INFO">${DYNAMICPAYLOAD} = {'nome': 'Amy', 'email': 'kwells@example.com', 'password': 'UtR&amp;sAR^(7', 'administrador': 'false'}</msg>
+<var>${DYNAMICPAYLOAD}</var>
+<arg>nome=${FIRSTNAME}</arg>
+<arg>email=${EMAIL}</arg>
+<arg>password=${PASSWORD}</arg>
+<arg>administrador=${ADM}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.709616" elapsed="0.000110"/>
+</kw>
+<return>
+<value>${DYNAMICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.709745" elapsed="0.000014"/>
+</return>
+<msg time="2025-09-12T12:46:33.709802" level="INFO">${dynamic} = {'nome': 'Amy', 'email': 'kwells@example.com', 'password': 'UtR&amp;sAR^(7', 'administrador': 'false'}</msg>
+<var>${dynamic}</var>
+<status status="PASS" start="2025-09-12T12:46:33.708978" elapsed="0.000834"/>
+</kw>
+<if>
+<branch type="IF" condition="'${domain}' != ''">
+<kw name="First Name" owner="FakerLibrary">
+<var>${nome}</var>
+<status status="NOT RUN" start="2025-09-12T12:46:33.709895" elapsed="0.000006"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${email}</var>
+<arg>${nome}${domain}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-09-12T12:46:33.709928" elapsed="0.000006"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${dynamic}</arg>
+<arg>email=${email}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="NOT RUN" start="2025-09-12T12:46:33.709962" elapsed="0.000004"/>
+</kw>
+<status status="NOT RUN" start="2025-09-12T12:46:33.709844" elapsed="0.000131"/>
+</branch>
+<status status="PASS" start="2025-09-12T12:46:33.709833" elapsed="0.000150"/>
+</if>
+<kw name="Criar DataMass de Novo Usuário Estatico">
+<kw name="Importar JSON estático" owner="config">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-09-12T12:46:33.710320" level="INFO">${data} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${data}</var>
+<arg>${EXECDIR}/resources/${nome_arquivo}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.710168" elapsed="0.000160"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-09-12T12:46:33.710351" elapsed="0.000009"/>
+</return>
+<msg time="2025-09-12T12:46:33.710395" level="INFO">${json} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${json}</var>
+<arg>user.json</arg>
+<status status="PASS" start="2025-09-12T12:46:33.710102" elapsed="0.000300"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.710562" level="INFO">${STATICPAYLOAD} = {'nome': ''}</msg>
+<var>${STATICPAYLOAD}</var>
+<arg>${json["${testcase}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.710431" elapsed="0.000138"/>
+</kw>
+<return>
+<value>${STATICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.710582" elapsed="0.000008"/>
+</return>
+<msg time="2025-09-12T12:46:33.710622" level="INFO">${static} = {'nome': ''}</msg>
+<var>${static}</var>
+<arg>${testcase}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.710021" elapsed="0.000608"/>
+</kw>
+<kw name="Copy Dictionary" owner="Collections">
+<msg time="2025-09-12T12:46:33.710704" level="INFO">${body} = {'nome': 'Amy', 'email': 'kwells@example.com', 'password': 'UtR&amp;sAR^(7', 'administrador': 'false'}</msg>
+<var>${body}</var>
+<arg>${dynamic}</arg>
+<doc>Returns a copy of the given dictionary.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.710658" elapsed="0.000052"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${body}</arg>
+<arg>&amp;{static}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.710738" elapsed="0.000048"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nPayload: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.710846" elapsed="0.000046"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.710972" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.710931" elapsed="0.000090"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.713774" level="INFO">POST Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '95', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "", "email": "kwells@example.com", "password": "UtR&amp;sAR^(7", "administrador": "false"}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.713806" level="INFO">POST Response : url=http://localhost:3000/usuarios 
+ status=400, reason=Bad Request 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '48', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "nome": "nome não pode ficar em branco"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.713852" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/usuarios</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.711052" elapsed="0.002809"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Validar Falha No Cadastro">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.714425" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.714262" elapsed="0.000183"/>
+</kw>
+<arg>Should Be Equal As Integers</arg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.714208" elapsed="0.000254"/>
+</kw>
+<arg>${response}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.714088" elapsed="0.000391"/>
+</kw>
+<arg>'${testcase}' == 'user_valido'</arg>
+<arg>Validar Sucesso No Cadastro</arg>
+<arg>${response}</arg>
+<arg>ELSE IF</arg>
+<arg>'${testcase}' != 'user_valido'</arg>
+<arg>Validar Falha No Cadastro</arg>
+<arg>${response}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.713934" elapsed="0.000558"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.714715" level="INFO">Mensagem de status: {'nome': 'nome não pode ficar em branco'}</msg>
+<arg>Mensagem de status: ${response.json()}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.714533" elapsed="0.000216"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.714787" elapsed="0.000136"/>
+</kw>
+<arg>user_blank_name</arg>
+<status status="PASS" start="2025-09-12T12:46:33.708765" elapsed="0.006181"/>
+</kw>
+<status status="PASS" start="2025-09-12T12:46:33.708606" elapsed="0.006397"/>
+</test>
+<test id="s1-s3-s1-t3" name="Criar Novo Usuário - Sem Email" line="72">
+<kw name="Criar Novo Usuário">
+<kw name="Criar DataMass de Novo Usuário Dinâmico">
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.715559" level="INFO">${FIRSTNAME} = Darrell</msg>
+<var>${FIRSTNAME}</var>
+<status status="PASS" start="2025-09-12T12:46:33.715481" elapsed="0.000086"/>
+</kw>
+<kw name="Email" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.715710" level="INFO">${EMAIL} = lisathomas@example.com</msg>
+<var>${EMAIL}</var>
+<status status="PASS" start="2025-09-12T12:46:33.715595" elapsed="0.000123"/>
+</kw>
+<kw name="Password" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.715793" level="INFO">${PASSWORD} = %d@6)pShRC</msg>
+<var>${PASSWORD}</var>
+<doc>Generate a random password of the specified ``length``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.715746" elapsed="0.000054"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.715863" level="INFO">${list} = ['true', 'false']</msg>
+<var>${list}</var>
+<arg>true</arg>
+<arg>false</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.715828" elapsed="0.000042"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.715996" level="INFO">${ADM} = true</msg>
+<var>${ADM}</var>
+<arg>${list}</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.715901" elapsed="0.000101"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.716137" level="INFO">${DYNAMICPAYLOAD} = {'nome': 'Darrell', 'email': 'lisathomas@example.com', 'password': '%d@6)pShRC', 'administrador': 'true'}</msg>
+<var>${DYNAMICPAYLOAD}</var>
+<arg>nome=${FIRSTNAME}</arg>
+<arg>email=${EMAIL}</arg>
+<arg>password=${PASSWORD}</arg>
+<arg>administrador=${ADM}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.716035" elapsed="0.000110"/>
+</kw>
+<return>
+<value>${DYNAMICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.716163" elapsed="0.000014"/>
+</return>
+<msg time="2025-09-12T12:46:33.716214" level="INFO">${dynamic} = {'nome': 'Darrell', 'email': 'lisathomas@example.com', 'password': '%d@6)pShRC', 'administrador': 'true'}</msg>
+<var>${dynamic}</var>
+<status status="PASS" start="2025-09-12T12:46:33.715419" elapsed="0.000802"/>
+</kw>
+<if>
+<branch type="IF" condition="'${domain}' != ''">
+<kw name="First Name" owner="FakerLibrary">
+<var>${nome}</var>
+<status status="NOT RUN" start="2025-09-12T12:46:33.716292" elapsed="0.000006"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${email}</var>
+<arg>${nome}${domain}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-09-12T12:46:33.716324" elapsed="0.000005"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${dynamic}</arg>
+<arg>email=${email}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="NOT RUN" start="2025-09-12T12:46:33.716354" elapsed="0.000005"/>
+</kw>
+<status status="NOT RUN" start="2025-09-12T12:46:33.716243" elapsed="0.000124"/>
+</branch>
+<status status="PASS" start="2025-09-12T12:46:33.716236" elapsed="0.000138"/>
+</if>
+<kw name="Criar DataMass de Novo Usuário Estatico">
+<kw name="Importar JSON estático" owner="config">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-09-12T12:46:33.716705" level="INFO">${data} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${data}</var>
+<arg>${EXECDIR}/resources/${nome_arquivo}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.716553" elapsed="0.000195"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-09-12T12:46:33.716764" elapsed="0.000008"/>
+</return>
+<msg time="2025-09-12T12:46:33.716808" level="INFO">${json} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${json}</var>
+<arg>user.json</arg>
+<status status="PASS" start="2025-09-12T12:46:33.716492" elapsed="0.000323"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.716978" level="INFO">${STATICPAYLOAD} = {'email': ''}</msg>
+<var>${STATICPAYLOAD}</var>
+<arg>${json["${testcase}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.716845" elapsed="0.000141"/>
+</kw>
+<return>
+<value>${STATICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.716999" elapsed="0.000008"/>
+</return>
+<msg time="2025-09-12T12:46:33.717038" level="INFO">${static} = {'email': ''}</msg>
+<var>${static}</var>
+<arg>${testcase}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.716410" elapsed="0.000635"/>
+</kw>
+<kw name="Copy Dictionary" owner="Collections">
+<msg time="2025-09-12T12:46:33.717120" level="INFO">${body} = {'nome': 'Darrell', 'email': 'lisathomas@example.com', 'password': '%d@6)pShRC', 'administrador': 'true'}</msg>
+<var>${body}</var>
+<arg>${dynamic}</arg>
+<doc>Returns a copy of the given dictionary.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.717073" elapsed="0.000054"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${body}</arg>
+<arg>&amp;{static}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.717155" elapsed="0.000048"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nPayload: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.717232" elapsed="0.000044"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.717350" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.717312" elapsed="0.000086"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.720113" level="INFO">POST Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '83', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Darrell", "email": "", "password": "%d@6)pShRC", "administrador": "true"}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.720144" level="INFO">POST Response : url=http://localhost:3000/usuarios 
+ status=400, reason=Bad Request 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '50', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "email": "email não pode ficar em branco"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.720185" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/usuarios</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.717428" elapsed="0.002765"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Validar Falha No Cadastro">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.720664" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.720534" elapsed="0.000148"/>
+</kw>
+<arg>Should Be Equal As Integers</arg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.720494" elapsed="0.000205"/>
+</kw>
+<arg>${response}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.720412" elapsed="0.000305"/>
+</kw>
+<arg>'${testcase}' == 'user_valido'</arg>
+<arg>Validar Sucesso No Cadastro</arg>
+<arg>${response}</arg>
+<arg>ELSE IF</arg>
+<arg>'${testcase}' != 'user_valido'</arg>
+<arg>Validar Falha No Cadastro</arg>
+<arg>${response}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.720253" elapsed="0.000539"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.720983" level="INFO">Mensagem de status: {'email': 'email não pode ficar em branco'}</msg>
+<arg>Mensagem de status: ${response.json()}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.720831" elapsed="0.000178"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.721048" elapsed="0.000330"/>
+</kw>
+<arg>user_blank_email</arg>
+<status status="PASS" start="2025-09-12T12:46:33.715236" elapsed="0.006225"/>
+</kw>
+<status status="PASS" start="2025-09-12T12:46:33.715078" elapsed="0.006454"/>
+</test>
+<test id="s1-s3-s1-t4" name="Criar Novo Usuário - Sem Senha" line="75">
+<kw name="Criar Novo Usuário">
+<kw name="Criar DataMass de Novo Usuário Dinâmico">
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.722477" level="INFO">${FIRSTNAME} = Allison</msg>
+<var>${FIRSTNAME}</var>
+<status status="PASS" start="2025-09-12T12:46:33.722389" elapsed="0.000097"/>
+</kw>
+<kw name="Email" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.722636" level="INFO">${EMAIL} = wilsonjames@example.org</msg>
+<var>${EMAIL}</var>
+<status status="PASS" start="2025-09-12T12:46:33.722517" elapsed="0.000126"/>
+</kw>
+<kw name="Password" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.722717" level="INFO">${PASSWORD} = @qKLSi*hW6</msg>
+<var>${PASSWORD}</var>
+<doc>Generate a random password of the specified ``length``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.722671" elapsed="0.000053"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.722789" level="INFO">${list} = ['true', 'false']</msg>
+<var>${list}</var>
+<arg>true</arg>
+<arg>false</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.722753" elapsed="0.000042"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.722919" level="INFO">${ADM} = false</msg>
+<var>${ADM}</var>
+<arg>${list}</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.722824" elapsed="0.000103"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.723064" level="INFO">${DYNAMICPAYLOAD} = {'nome': 'Allison', 'email': 'wilsonjames@example.org', 'password': '@qKLSi*hW6', 'administrador': 'false'}</msg>
+<var>${DYNAMICPAYLOAD}</var>
+<arg>nome=${FIRSTNAME}</arg>
+<arg>email=${EMAIL}</arg>
+<arg>password=${PASSWORD}</arg>
+<arg>administrador=${ADM}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.722961" elapsed="0.000111"/>
+</kw>
+<return>
+<value>${DYNAMICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.723122" elapsed="0.000014"/>
+</return>
+<msg time="2025-09-12T12:46:33.723175" level="INFO">${dynamic} = {'nome': 'Allison', 'email': 'wilsonjames@example.org', 'password': '@qKLSi*hW6', 'administrador': 'false'}</msg>
+<var>${dynamic}</var>
+<status status="PASS" start="2025-09-12T12:46:33.722318" elapsed="0.000864"/>
+</kw>
+<if>
+<branch type="IF" condition="'${domain}' != ''">
+<kw name="First Name" owner="FakerLibrary">
+<var>${nome}</var>
+<status status="NOT RUN" start="2025-09-12T12:46:33.723258" elapsed="0.000006"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${email}</var>
+<arg>${nome}${domain}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-09-12T12:46:33.723291" elapsed="0.000005"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${dynamic}</arg>
+<arg>email=${email}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="NOT RUN" start="2025-09-12T12:46:33.723323" elapsed="0.000005"/>
+</kw>
+<status status="NOT RUN" start="2025-09-12T12:46:33.723204" elapsed="0.000133"/>
+</branch>
+<status status="PASS" start="2025-09-12T12:46:33.723197" elapsed="0.000148"/>
+</if>
+<kw name="Criar DataMass de Novo Usuário Estatico">
+<kw name="Importar JSON estático" owner="config">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-09-12T12:46:33.723680" level="INFO">${data} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${data}</var>
+<arg>${EXECDIR}/resources/${nome_arquivo}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.723534" elapsed="0.000155"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-09-12T12:46:33.723703" elapsed="0.000008"/>
+</return>
+<msg time="2025-09-12T12:46:33.723744" level="INFO">${json} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${json}</var>
+<arg>user.json</arg>
+<status status="PASS" start="2025-09-12T12:46:33.723470" elapsed="0.000281"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.723910" level="INFO">${STATICPAYLOAD} = {'password': ''}</msg>
+<var>${STATICPAYLOAD}</var>
+<arg>${json["${testcase}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.723779" elapsed="0.000138"/>
+</kw>
+<return>
+<value>${STATICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.723934" elapsed="0.000007"/>
+</return>
+<msg time="2025-09-12T12:46:33.723973" level="INFO">${static} = {'password': ''}</msg>
+<var>${static}</var>
+<arg>${testcase}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.723383" elapsed="0.000596"/>
+</kw>
+<kw name="Copy Dictionary" owner="Collections">
+<msg time="2025-09-12T12:46:33.724056" level="INFO">${body} = {'nome': 'Allison', 'email': 'wilsonjames@example.org', 'password': '@qKLSi*hW6', 'administrador': 'false'}</msg>
+<var>${body}</var>
+<arg>${dynamic}</arg>
+<doc>Returns a copy of the given dictionary.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.724007" elapsed="0.000056"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${body}</arg>
+<arg>&amp;{static}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.724091" elapsed="0.000058"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nPayload: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.724181" elapsed="0.000047"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.724303" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.724265" elapsed="0.000087"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.727377" level="INFO">POST Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '97', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Allison", "email": "wilsonjames@example.org", "password": "", "administrador": "false"}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.727411" level="INFO">POST Response : url=http://localhost:3000/usuarios 
+ status=400, reason=Bad Request 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '56', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "password": "password não pode ficar em branco"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.727463" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/usuarios</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.724383" elapsed="0.003089"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Validar Falha No Cadastro">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.727992" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.727859" elapsed="0.000152"/>
+</kw>
+<arg>Should Be Equal As Integers</arg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.727819" elapsed="0.000208"/>
+</kw>
+<arg>${response}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.727730" elapsed="0.000314"/>
+</kw>
+<arg>'${testcase}' == 'user_valido'</arg>
+<arg>Validar Sucesso No Cadastro</arg>
+<arg>${response}</arg>
+<arg>ELSE IF</arg>
+<arg>'${testcase}' != 'user_valido'</arg>
+<arg>Validar Falha No Cadastro</arg>
+<arg>${response}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.727538" elapsed="0.000518"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.728268" level="INFO">Mensagem de status: {'password': 'password não pode ficar em branco'}</msg>
+<arg>Mensagem de status: ${response.json()}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.728091" elapsed="0.000203"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.728333" elapsed="0.000127"/>
+</kw>
+<arg>user_blank_password</arg>
+<status status="PASS" start="2025-09-12T12:46:33.721776" elapsed="0.006705"/>
+</kw>
+<status status="PASS" start="2025-09-12T12:46:33.721602" elapsed="0.006964"/>
+</test>
+<test id="s1-s3-s1-t5" name="Criar Novo Usuário - Sem Administrador" line="78">
+<kw name="Criar Novo Usuário">
+<kw name="Criar DataMass de Novo Usuário Dinâmico">
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.729113" level="INFO">${FIRSTNAME} = Jessica</msg>
+<var>${FIRSTNAME}</var>
+<status status="PASS" start="2025-09-12T12:46:33.729038" elapsed="0.000083"/>
+</kw>
+<kw name="Email" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.729259" level="INFO">${EMAIL} = michellesmith@example.com</msg>
+<var>${EMAIL}</var>
+<status status="PASS" start="2025-09-12T12:46:33.729148" elapsed="0.000119"/>
+</kw>
+<kw name="Password" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.729342" level="INFO">${PASSWORD} = P4HOfnqF+9</msg>
+<var>${PASSWORD}</var>
+<doc>Generate a random password of the specified ``length``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.729296" elapsed="0.000053"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.729414" level="INFO">${list} = ['true', 'false']</msg>
+<var>${list}</var>
+<arg>true</arg>
+<arg>false</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.729379" elapsed="0.000042"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.729545" level="INFO">${ADM} = false</msg>
+<var>${ADM}</var>
+<arg>${list}</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.729452" elapsed="0.000100"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.729683" level="INFO">${DYNAMICPAYLOAD} = {'nome': 'Jessica', 'email': 'michellesmith@example.com', 'password': 'P4HOfnqF+9', 'administrador': 'false'}</msg>
+<var>${DYNAMICPAYLOAD}</var>
+<arg>nome=${FIRSTNAME}</arg>
+<arg>email=${EMAIL}</arg>
+<arg>password=${PASSWORD}</arg>
+<arg>administrador=${ADM}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.729585" elapsed="0.000106"/>
+</kw>
+<return>
+<value>${DYNAMICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.729708" elapsed="0.000013"/>
+</return>
+<msg time="2025-09-12T12:46:33.729760" level="INFO">${dynamic} = {'nome': 'Jessica', 'email': 'michellesmith@example.com', 'password': 'P4HOfnqF+9', 'administrador': 'false'}</msg>
+<var>${dynamic}</var>
+<status status="PASS" start="2025-09-12T12:46:33.728977" elapsed="0.000790"/>
+</kw>
+<if>
+<branch type="IF" condition="'${domain}' != ''">
+<kw name="First Name" owner="FakerLibrary">
+<var>${nome}</var>
+<status status="NOT RUN" start="2025-09-12T12:46:33.729837" elapsed="0.000006"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${email}</var>
+<arg>${nome}${domain}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-09-12T12:46:33.729870" elapsed="0.000005"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${dynamic}</arg>
+<arg>email=${email}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="NOT RUN" start="2025-09-12T12:46:33.729902" elapsed="0.000005"/>
+</kw>
+<status status="NOT RUN" start="2025-09-12T12:46:33.729789" elapsed="0.000126"/>
+</branch>
+<status status="PASS" start="2025-09-12T12:46:33.729782" elapsed="0.000141"/>
+</if>
+<kw name="Criar DataMass de Novo Usuário Estatico">
+<kw name="Importar JSON estático" owner="config">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-09-12T12:46:33.730251" level="INFO">${data} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${data}</var>
+<arg>${EXECDIR}/resources/${nome_arquivo}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.730109" elapsed="0.000151"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-09-12T12:46:33.730273" elapsed="0.000008"/>
+</return>
+<msg time="2025-09-12T12:46:33.730313" level="INFO">${json} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${json}</var>
+<arg>user.json</arg>
+<status status="PASS" start="2025-09-12T12:46:33.730039" elapsed="0.000281"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.730481" level="INFO">${STATICPAYLOAD} = {'administrador': ''}</msg>
+<var>${STATICPAYLOAD}</var>
+<arg>${json["${testcase}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.730350" elapsed="0.000139"/>
+</kw>
+<return>
+<value>${STATICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.730503" elapsed="0.000007"/>
+</return>
+<msg time="2025-09-12T12:46:33.730543" level="INFO">${static} = {'administrador': ''}</msg>
+<var>${static}</var>
+<arg>${testcase}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.729958" elapsed="0.000592"/>
+</kw>
+<kw name="Copy Dictionary" owner="Collections">
+<msg time="2025-09-12T12:46:33.730632" level="INFO">${body} = {'nome': 'Jessica', 'email': 'michellesmith@example.com', 'password': 'P4HOfnqF+9', 'administrador': 'false'}</msg>
+<var>${body}</var>
+<arg>${dynamic}</arg>
+<doc>Returns a copy of the given dictionary.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.730585" elapsed="0.000054"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${body}</arg>
+<arg>&amp;{static}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.730671" elapsed="0.000049"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nPayload: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.730751" elapsed="0.000045"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.730871" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.730832" elapsed="0.000089"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.734070" level="INFO">POST Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '104', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Jessica", "email": "michellesmith@example.com", "password": "P4HOfnqF+9", "administrador": ""}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.734105" level="INFO">POST Response : url=http://localhost:3000/usuarios 
+ status=400, reason=Bad Request 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '67', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "administrador": "administrador deve ser 'true' ou 'false'"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.734148" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/usuarios</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.730952" elapsed="0.003206"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Validar Falha No Cadastro">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.734659" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.734529" elapsed="0.000155"/>
+</kw>
+<arg>Should Be Equal As Integers</arg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.734488" elapsed="0.000218"/>
+</kw>
+<arg>${response}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.734393" elapsed="0.000333"/>
+</kw>
+<arg>'${testcase}' == 'user_valido'</arg>
+<arg>Validar Sucesso No Cadastro</arg>
+<arg>${response}</arg>
+<arg>ELSE IF</arg>
+<arg>'${testcase}' != 'user_valido'</arg>
+<arg>Validar Falha No Cadastro</arg>
+<arg>${response}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.734248" elapsed="0.000490"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.734922" level="INFO">Mensagem de status: {'administrador': "administrador deve ser 'true' ou 'false'"}</msg>
+<arg>Mensagem de status: ${response.json()}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.734772" elapsed="0.000173"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.734986" elapsed="0.000129"/>
+</kw>
+<arg>user_blank_admin</arg>
+<status status="PASS" start="2025-09-12T12:46:33.728782" elapsed="0.006355"/>
+</kw>
+<status status="PASS" start="2025-09-12T12:46:33.728635" elapsed="0.006555"/>
+</test>
+<test id="s1-s3-s1-t6" name="Criar Novo Usuário - Email repetido" line="81">
+<kw name="Criar Novo Usuário">
+<kw name="Criar DataMass de Novo Usuário Dinâmico">
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.735734" level="INFO">${FIRSTNAME} = Jacqueline</msg>
+<var>${FIRSTNAME}</var>
+<status status="PASS" start="2025-09-12T12:46:33.735661" elapsed="0.000081"/>
+</kw>
+<kw name="Email" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.735845" level="INFO">${EMAIL} = megan16@example.net</msg>
+<var>${EMAIL}</var>
+<status status="PASS" start="2025-09-12T12:46:33.735769" elapsed="0.000083"/>
+</kw>
+<kw name="Password" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.735924" level="INFO">${PASSWORD} = xA9XHBszV+</msg>
+<var>${PASSWORD}</var>
+<doc>Generate a random password of the specified ``length``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.735880" elapsed="0.000051"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.735993" level="INFO">${list} = ['true', 'false']</msg>
+<var>${list}</var>
+<arg>true</arg>
+<arg>false</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.735958" elapsed="0.000041"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.736121" level="INFO">${ADM} = false</msg>
+<var>${ADM}</var>
+<arg>${list}</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.736029" elapsed="0.000099"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.736286" level="INFO">${DYNAMICPAYLOAD} = {'nome': 'Jacqueline', 'email': 'megan16@example.net', 'password': 'xA9XHBszV+', 'administrador': 'false'}</msg>
+<var>${DYNAMICPAYLOAD}</var>
+<arg>nome=${FIRSTNAME}</arg>
+<arg>email=${EMAIL}</arg>
+<arg>password=${PASSWORD}</arg>
+<arg>administrador=${ADM}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.736167" elapsed="0.000128"/>
+</kw>
+<return>
+<value>${DYNAMICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.736313" elapsed="0.000013"/>
+</return>
+<msg time="2025-09-12T12:46:33.736366" level="INFO">${dynamic} = {'nome': 'Jacqueline', 'email': 'megan16@example.net', 'password': 'xA9XHBszV+', 'administrador': 'false'}</msg>
+<var>${dynamic}</var>
+<status status="PASS" start="2025-09-12T12:46:33.735599" elapsed="0.000775"/>
+</kw>
+<if>
+<branch type="IF" condition="'${domain}' != ''">
+<kw name="First Name" owner="FakerLibrary">
+<var>${nome}</var>
+<status status="NOT RUN" start="2025-09-12T12:46:33.736446" elapsed="0.000006"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${email}</var>
+<arg>${nome}${domain}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-09-12T12:46:33.736480" elapsed="0.000006"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${dynamic}</arg>
+<arg>email=${email}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="NOT RUN" start="2025-09-12T12:46:33.736513" elapsed="0.000005"/>
+</kw>
+<status status="NOT RUN" start="2025-09-12T12:46:33.736395" elapsed="0.000131"/>
+</branch>
+<status status="PASS" start="2025-09-12T12:46:33.736388" elapsed="0.000146"/>
+</if>
+<kw name="Criar DataMass de Novo Usuário Estatico">
+<kw name="Importar JSON estático" owner="config">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-09-12T12:46:33.736880" level="INFO">${data} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${data}</var>
+<arg>${EXECDIR}/resources/${nome_arquivo}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.736732" elapsed="0.000157"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-09-12T12:46:33.736902" elapsed="0.000009"/>
+</return>
+<msg time="2025-09-12T12:46:33.736960" level="INFO">${json} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${json}</var>
+<arg>user.json</arg>
+<status status="PASS" start="2025-09-12T12:46:33.736663" elapsed="0.000317"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.737219" level="INFO">${STATICPAYLOAD} = {'email': 'beltrano@qa.com.br'}</msg>
+<var>${STATICPAYLOAD}</var>
+<arg>${json["${testcase}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.737055" elapsed="0.000173"/>
+</kw>
+<return>
+<value>${STATICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.737242" elapsed="0.000008"/>
+</return>
+<msg time="2025-09-12T12:46:33.737283" level="INFO">${static} = {'email': 'beltrano@qa.com.br'}</msg>
+<var>${static}</var>
+<arg>${testcase}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.736573" elapsed="0.000717"/>
+</kw>
+<kw name="Copy Dictionary" owner="Collections">
+<msg time="2025-09-12T12:46:33.737369" level="INFO">${body} = {'nome': 'Jacqueline', 'email': 'megan16@example.net', 'password': 'xA9XHBszV+', 'administrador': 'false'}</msg>
+<var>${body}</var>
+<arg>${dynamic}</arg>
+<doc>Returns a copy of the given dictionary.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.737321" elapsed="0.000057"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${body}</arg>
+<arg>&amp;{static}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.737407" elapsed="0.000049"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nPayload: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.737485" elapsed="0.000051"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.737631" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.737595" elapsed="0.000086"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.741656" level="INFO">POST Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '105', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Jacqueline", "email": "beltrano@qa.com.br", "password": "xA9XHBszV+", "administrador": "false"}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.741701" level="INFO">POST Response : url=http://localhost:3000/usuarios 
+ status=400, reason=Bad Request 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '53', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Este email já está sendo usado"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.741767" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/usuarios</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.737713" elapsed="0.004065"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Validar Falha No Cadastro">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.742277" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.742140" elapsed="0.000156"/>
+</kw>
+<arg>Should Be Equal As Integers</arg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.742101" elapsed="0.000211"/>
+</kw>
+<arg>${response}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.742012" elapsed="0.000317"/>
+</kw>
+<arg>'${testcase}' == 'user_valido'</arg>
+<arg>Validar Sucesso No Cadastro</arg>
+<arg>${response}</arg>
+<arg>ELSE IF</arg>
+<arg>'${testcase}' != 'user_valido'</arg>
+<arg>Validar Falha No Cadastro</arg>
+<arg>${response}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.741851" elapsed="0.000490"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.742525" level="INFO">Mensagem de status: {'message': 'Este email já está sendo usado'}</msg>
+<arg>Mensagem de status: ${response.json()}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.742375" elapsed="0.000179"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.742595" elapsed="0.000126"/>
+</kw>
+<arg>user_repeat_email</arg>
+<status status="PASS" start="2025-09-12T12:46:33.735414" elapsed="0.007328"/>
+</kw>
+<status status="PASS" start="2025-09-12T12:46:33.735261" elapsed="0.007532"/>
+</test>
+<test id="s1-s3-s1-t7" name="Criar Novo Usuário - Email Gmail" line="84">
+<kw name="Criar Novo Usuário">
+<kw name="Criar DataMass de Novo Usuário Dinâmico">
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.743248" level="INFO">${FIRSTNAME} = Daniel</msg>
+<var>${FIRSTNAME}</var>
+<status status="PASS" start="2025-09-12T12:46:33.743171" elapsed="0.000085"/>
+</kw>
+<kw name="Email" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.743375" level="INFO">${EMAIL} = ktaylor@example.net</msg>
+<var>${EMAIL}</var>
+<status status="PASS" start="2025-09-12T12:46:33.743284" elapsed="0.000098"/>
+</kw>
+<kw name="Password" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.743455" level="INFO">${PASSWORD} = %yO&amp;KHK^D5</msg>
+<var>${PASSWORD}</var>
+<doc>Generate a random password of the specified ``length``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.743409" elapsed="0.000053"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.743522" level="INFO">${list} = ['true', 'false']</msg>
+<var>${list}</var>
+<arg>true</arg>
+<arg>false</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.743490" elapsed="0.000038"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.743651" level="INFO">${ADM} = true</msg>
+<var>${ADM}</var>
+<arg>${list}</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.743556" elapsed="0.000103"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.743792" level="INFO">${DYNAMICPAYLOAD} = {'nome': 'Daniel', 'email': 'ktaylor@example.net', 'password': '%yO&amp;KHK^D5', 'administrador': 'true'}</msg>
+<var>${DYNAMICPAYLOAD}</var>
+<arg>nome=${FIRSTNAME}</arg>
+<arg>email=${EMAIL}</arg>
+<arg>password=${PASSWORD}</arg>
+<arg>administrador=${ADM}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.743693" elapsed="0.000107"/>
+</kw>
+<return>
+<value>${DYNAMICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.743818" elapsed="0.000015"/>
+</return>
+<msg time="2025-09-12T12:46:33.743870" level="INFO">${dynamic} = {'nome': 'Daniel', 'email': 'ktaylor@example.net', 'password': '%yO&amp;KHK^D5', 'administrador': 'true'}</msg>
+<var>${dynamic}</var>
+<status status="PASS" start="2025-09-12T12:46:33.743114" elapsed="0.000764"/>
+</kw>
+<if>
+<branch type="IF" condition="'${domain}' != ''">
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.744005" level="INFO">${nome} = Helen</msg>
+<var>${nome}</var>
+<status status="PASS" start="2025-09-12T12:46:33.743950" elapsed="0.000061"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.744087" level="INFO">${email} = Helen@gmail.com</msg>
+<var>${email}</var>
+<arg>${nome}${domain}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.744039" elapsed="0.000055"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${dynamic}</arg>
+<arg>email=${email}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.744122" elapsed="0.000047"/>
+</kw>
+<status status="PASS" start="2025-09-12T12:46:33.743901" elapsed="0.000279"/>
+</branch>
+<status status="PASS" start="2025-09-12T12:46:33.743894" elapsed="0.000293"/>
+</if>
+<kw name="Criar DataMass de Novo Usuário Estatico">
+<kw name="Importar JSON estático" owner="config">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-09-12T12:46:33.744521" level="INFO">${data} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${data}</var>
+<arg>${EXECDIR}/resources/${nome_arquivo}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.744361" elapsed="0.000169"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-09-12T12:46:33.744572" elapsed="0.000008"/>
+</return>
+<msg time="2025-09-12T12:46:33.744614" level="INFO">${json} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${json}</var>
+<arg>user.json</arg>
+<status status="PASS" start="2025-09-12T12:46:33.744302" elapsed="0.000319"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.744782" level="INFO">${STATICPAYLOAD} = {}</msg>
+<var>${STATICPAYLOAD}</var>
+<arg>${json["${testcase}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.744649" elapsed="0.000141"/>
+</kw>
+<return>
+<value>${STATICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.744804" elapsed="0.000007"/>
+</return>
+<msg time="2025-09-12T12:46:33.744844" level="INFO">${static} = {}</msg>
+<var>${static}</var>
+<arg>${testcase}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.744223" elapsed="0.000628"/>
+</kw>
+<kw name="Copy Dictionary" owner="Collections">
+<msg time="2025-09-12T12:46:33.744939" level="INFO">${body} = {'nome': 'Daniel', 'email': 'Helen@gmail.com', 'password': '%yO&amp;KHK^D5', 'administrador': 'true'}</msg>
+<var>${body}</var>
+<arg>${dynamic}</arg>
+<doc>Returns a copy of the given dictionary.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.744885" elapsed="0.000060"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${body}</arg>
+<arg>&amp;{static}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.744973" elapsed="0.000045"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nPayload: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.745047" elapsed="0.000044"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.745168" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.745129" elapsed="0.000086"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.753698" level="INFO">POST Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '97', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Daniel", "email": "Helen@gmail.com", "password": "%yO&amp;KHK^D5", "administrador": "true"}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.753762" level="INFO">POST Response : url=http://localhost:3000/usuarios 
+ status=201, reason=Created 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '82', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "lD9fxjl4XSSwHgo1"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.753847" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/usuarios</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.745246" elapsed="0.008612"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Validar Falha No Cadastro">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.755866" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2025-09-12T12:46:33.756310" level="FAIL">201 != 400</msg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="FAIL" start="2025-09-12T12:46:33.754911" elapsed="0.001498">201 != 400</status>
+</kw>
+<arg>Should Be Equal As Integers</arg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="FAIL" start="2025-09-12T12:46:33.754595" elapsed="0.001903">201 != 400</status>
+</kw>
+<arg>${response}</arg>
+<status status="FAIL" start="2025-09-12T12:46:33.754306" elapsed="0.002400">201 != 400</status>
+</kw>
+<arg>'${testcase}' == 'user_valido'</arg>
+<arg>Validar Sucesso No Cadastro</arg>
+<arg>${response}</arg>
+<arg>ELSE IF</arg>
+<arg>'${testcase}' != 'user_valido'</arg>
+<arg>Validar Falha No Cadastro</arg>
+<arg>${response}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-09-12T12:46:33.753969" elapsed="0.002813">201 != 400</status>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.757708" level="INFO">Mensagem de status: {'message': 'Cadastro realizado com sucesso', '_id': 'lD9fxjl4XSSwHgo1'}</msg>
+<arg>Mensagem de status: ${response.json()}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.756936" elapsed="0.000884"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.758057" elapsed="0.000407"/>
+</kw>
+<arg>user_gmail</arg>
+<arg>@gmail.com</arg>
+<status status="FAIL" start="2025-09-12T12:46:33.743016" elapsed="0.015570">201 != 400</status>
+</kw>
+<status status="FAIL" start="2025-09-12T12:46:33.742860" elapsed="0.015947">201 != 400</status>
+</test>
+<test id="s1-s3-s1-t8" name="Criar Novo Usuário - Email Hotmail" line="87">
+<kw name="Criar Novo Usuário">
+<kw name="Criar DataMass de Novo Usuário Dinâmico">
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.761420" level="INFO">${FIRSTNAME} = Whitney</msg>
+<var>${FIRSTNAME}</var>
+<status status="PASS" start="2025-09-12T12:46:33.761276" elapsed="0.000159"/>
+</kw>
+<kw name="Email" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.762358" level="INFO">${EMAIL} = oward@example.net</msg>
+<var>${EMAIL}</var>
+<status status="PASS" start="2025-09-12T12:46:33.761478" elapsed="0.001024"/>
+</kw>
+<kw name="Password" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.762643" level="INFO">${PASSWORD} = )7CGEmEsjQ</msg>
+<var>${PASSWORD}</var>
+<doc>Generate a random password of the specified ``length``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.762557" elapsed="0.000095"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.762741" level="INFO">${list} = ['true', 'false']</msg>
+<var>${list}</var>
+<arg>true</arg>
+<arg>false</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.762691" elapsed="0.000057"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.763587" level="INFO">${ADM} = true</msg>
+<var>${ADM}</var>
+<arg>${list}</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.762785" elapsed="0.000861"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.764000" level="INFO">${DYNAMICPAYLOAD} = {'nome': 'Whitney', 'email': 'oward@example.net', 'password': ')7CGEmEsjQ', 'administrador': 'true'}</msg>
+<var>${DYNAMICPAYLOAD}</var>
+<arg>nome=${FIRSTNAME}</arg>
+<arg>email=${EMAIL}</arg>
+<arg>password=${PASSWORD}</arg>
+<arg>administrador=${ADM}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.763762" elapsed="0.000249"/>
+</kw>
+<return>
+<value>${DYNAMICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.764098" elapsed="0.000092"/>
+</return>
+<msg time="2025-09-12T12:46:33.764435" level="INFO">${dynamic} = {'nome': 'Whitney', 'email': 'oward@example.net', 'password': ')7CGEmEsjQ', 'administrador': 'true'}</msg>
+<var>${dynamic}</var>
+<status status="PASS" start="2025-09-12T12:46:33.761120" elapsed="0.003344"/>
+</kw>
+<if>
+<branch type="IF" condition="'${domain}' != ''">
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.765312" level="INFO">${nome} = Cheryl</msg>
+<var>${nome}</var>
+<status status="PASS" start="2025-09-12T12:46:33.764986" elapsed="0.000370"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.766109" level="INFO">${email} = Cheryl@hotmail.com</msg>
+<var>${email}</var>
+<arg>${nome}${domain}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.765657" elapsed="0.000488"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${dynamic}</arg>
+<arg>email=${email}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.766362" elapsed="0.000267"/>
+</kw>
+<status status="PASS" start="2025-09-12T12:46:33.764554" elapsed="0.002098"/>
+</branch>
+<status status="PASS" start="2025-09-12T12:46:33.764524" elapsed="0.002144"/>
+</if>
+<kw name="Criar DataMass de Novo Usuário Estatico">
+<kw name="Importar JSON estático" owner="config">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-09-12T12:46:33.767173" level="INFO">${data} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${data}</var>
+<arg>${EXECDIR}/resources/${nome_arquivo}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.766962" elapsed="0.000222"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-09-12T12:46:33.767205" elapsed="0.000019"/>
+</return>
+<msg time="2025-09-12T12:46:33.767268" level="INFO">${json} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${json}</var>
+<arg>user.json</arg>
+<status status="PASS" start="2025-09-12T12:46:33.766885" elapsed="0.000391"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.767516" level="INFO">${STATICPAYLOAD} = {}</msg>
+<var>${STATICPAYLOAD}</var>
+<arg>${json["${testcase}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.767313" elapsed="0.000212"/>
+</kw>
+<return>
+<value>${STATICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.767541" elapsed="0.000009"/>
+</return>
+<msg time="2025-09-12T12:46:33.767587" level="INFO">${static} = {}</msg>
+<var>${static}</var>
+<arg>${testcase}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.766758" elapsed="0.000836"/>
+</kw>
+<kw name="Copy Dictionary" owner="Collections">
+<msg time="2025-09-12T12:46:33.767686" level="INFO">${body} = {'nome': 'Whitney', 'email': 'Cheryl@hotmail.com', 'password': ')7CGEmEsjQ', 'administrador': 'true'}</msg>
+<var>${body}</var>
+<arg>${dynamic}</arg>
+<doc>Returns a copy of the given dictionary.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.767628" elapsed="0.000065"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${body}</arg>
+<arg>&amp;{static}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.767726" elapsed="0.000049"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nPayload: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.767810" elapsed="0.000064"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.768018" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.767973" elapsed="0.000110"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.773723" level="INFO">POST Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '101', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Whitney", "email": "Cheryl@hotmail.com", "password": ")7CGEmEsjQ", "administrador": "true"}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.773774" level="INFO">POST Response : url=http://localhost:3000/usuarios 
+ status=201, reason=Created 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '82', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "x1Zrad2guSLRhvWP"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.773841" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/usuarios</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.768124" elapsed="0.005728"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Validar Falha No Cadastro">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.774655" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2025-09-12T12:46:33.774698" level="FAIL">201 != 400</msg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="FAIL" start="2025-09-12T12:46:33.774463" elapsed="0.000266">201 != 400</status>
+</kw>
+<arg>Should Be Equal As Integers</arg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="FAIL" start="2025-09-12T12:46:33.774390" elapsed="0.000365">201 != 400</status>
+</kw>
+<arg>${response}</arg>
+<status status="FAIL" start="2025-09-12T12:46:33.774220" elapsed="0.000577">201 != 400</status>
+</kw>
+<arg>'${testcase}' == 'user_valido'</arg>
+<arg>Validar Sucesso No Cadastro</arg>
+<arg>${response}</arg>
+<arg>ELSE IF</arg>
+<arg>'${testcase}' != 'user_valido'</arg>
+<arg>Validar Falha No Cadastro</arg>
+<arg>${response}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-09-12T12:46:33.773952" elapsed="0.000863">201 != 400</status>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.775033" level="INFO">Mensagem de status: {'message': 'Cadastro realizado com sucesso', '_id': 'x1Zrad2guSLRhvWP'}</msg>
+<arg>Mensagem de status: ${response.json()}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.774857" elapsed="0.000208"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.775144" elapsed="0.000144"/>
+</kw>
+<arg>user_hotmail</arg>
+<arg>@hotmail.com</arg>
+<status status="FAIL" start="2025-09-12T12:46:33.760029" elapsed="0.015301">201 != 400</status>
+</kw>
+<status status="FAIL" start="2025-09-12T12:46:33.759137" elapsed="0.016262">201 != 400</status>
+</test>
+<test id="s1-s3-s1-t9" name="Criar Novo Usuário - Email Sem Arroba" line="90">
+<kw name="Criar Novo Usuário">
+<kw name="Criar DataMass de Novo Usuário Dinâmico">
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.776211" level="INFO">${FIRSTNAME} = Megan</msg>
+<var>${FIRSTNAME}</var>
+<status status="PASS" start="2025-09-12T12:46:33.776128" elapsed="0.000091"/>
+</kw>
+<kw name="Email" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.776362" level="INFO">${EMAIL} = alvaradochristopher@example.org</msg>
+<var>${EMAIL}</var>
+<status status="PASS" start="2025-09-12T12:46:33.776247" elapsed="0.000122"/>
+</kw>
+<kw name="Password" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.776445" level="INFO">${PASSWORD} = !w&amp;h9Pww+W</msg>
+<var>${PASSWORD}</var>
+<doc>Generate a random password of the specified ``length``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.776398" elapsed="0.000055"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.776520" level="INFO">${list} = ['true', 'false']</msg>
+<var>${list}</var>
+<arg>true</arg>
+<arg>false</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.776484" elapsed="0.000043"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.776662" level="INFO">${ADM} = true</msg>
+<var>${ADM}</var>
+<arg>${list}</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.776556" elapsed="0.000114"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.776814" level="INFO">${DYNAMICPAYLOAD} = {'nome': 'Megan', 'email': 'alvaradochristopher@example.org', 'password': '!w&amp;h9Pww+W', 'administrador': 'true'}</msg>
+<var>${DYNAMICPAYLOAD}</var>
+<arg>nome=${FIRSTNAME}</arg>
+<arg>email=${EMAIL}</arg>
+<arg>password=${PASSWORD}</arg>
+<arg>administrador=${ADM}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.776708" elapsed="0.000115"/>
+</kw>
+<return>
+<value>${DYNAMICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.776842" elapsed="0.000013"/>
+</return>
+<msg time="2025-09-12T12:46:33.776895" level="INFO">${dynamic} = {'nome': 'Megan', 'email': 'alvaradochristopher@example.org', 'password': '!w&amp;h9Pww+W', 'administrador': 'true'}</msg>
+<var>${dynamic}</var>
+<status status="PASS" start="2025-09-12T12:46:33.776059" elapsed="0.000844"/>
+</kw>
+<if>
+<branch type="IF" condition="'${domain}' != ''">
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.777044" level="INFO">${nome} = Samantha</msg>
+<var>${nome}</var>
+<status status="PASS" start="2025-09-12T12:46:33.776983" elapsed="0.000068"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.777129" level="INFO">${email} = Samanthateste.com</msg>
+<var>${email}</var>
+<arg>${nome}${domain}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.777080" elapsed="0.000056"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${dynamic}</arg>
+<arg>email=${email}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.777165" elapsed="0.000049"/>
+</kw>
+<status status="PASS" start="2025-09-12T12:46:33.776925" elapsed="0.000301"/>
+</branch>
+<status status="PASS" start="2025-09-12T12:46:33.776918" elapsed="0.000316"/>
+</if>
+<kw name="Criar DataMass de Novo Usuário Estatico">
+<kw name="Importar JSON estático" owner="config">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-09-12T12:46:33.777583" level="INFO">${data} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${data}</var>
+<arg>${EXECDIR}/resources/${nome_arquivo}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.777424" elapsed="0.000168"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-09-12T12:46:33.777606" elapsed="0.000008"/>
+</return>
+<msg time="2025-09-12T12:46:33.777650" level="INFO">${json} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${json}</var>
+<arg>user.json</arg>
+<status status="PASS" start="2025-09-12T12:46:33.777362" elapsed="0.000295"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.777824" level="INFO">${STATICPAYLOAD} = {}</msg>
+<var>${STATICPAYLOAD}</var>
+<arg>${json["${testcase}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.777686" elapsed="0.000145"/>
+</kw>
+<return>
+<value>${STATICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.777845" elapsed="0.000007"/>
+</return>
+<msg time="2025-09-12T12:46:33.777886" level="INFO">${static} = {}</msg>
+<var>${static}</var>
+<arg>${testcase}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.777275" elapsed="0.000618"/>
+</kw>
+<kw name="Copy Dictionary" owner="Collections">
+<msg time="2025-09-12T12:46:33.777970" level="INFO">${body} = {'nome': 'Megan', 'email': 'Samanthateste.com', 'password': '!w&amp;h9Pww+W', 'administrador': 'true'}</msg>
+<var>${body}</var>
+<arg>${dynamic}</arg>
+<doc>Returns a copy of the given dictionary.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.777922" elapsed="0.000055"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${body}</arg>
+<arg>&amp;{static}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.778005" elapsed="0.000046"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nPayload: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.778081" elapsed="0.000046"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.778207" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.778163" elapsed="0.000105"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.782630" level="INFO">POST Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '98', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Megan", "email": "Samanthateste.com", "password": "!w&amp;h9Pww+W", "administrador": "true"}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.782681" level="INFO">POST Response : url=http://localhost:3000/usuarios 
+ status=400, reason=Bad Request 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '50', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "email": "email deve ser um email válido"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.782809" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/usuarios</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.778302" elapsed="0.004519"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Validar Falha No Cadastro">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.783423" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.783261" elapsed="0.000183"/>
+</kw>
+<arg>Should Be Equal As Integers</arg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.783217" elapsed="0.000247"/>
+</kw>
+<arg>${response}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.783113" elapsed="0.000369"/>
+</kw>
+<arg>'${testcase}' == 'user_valido'</arg>
+<arg>Validar Sucesso No Cadastro</arg>
+<arg>${response}</arg>
+<arg>ELSE IF</arg>
+<arg>'${testcase}' != 'user_valido'</arg>
+<arg>Validar Falha No Cadastro</arg>
+<arg>${response}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.782909" elapsed="0.000586"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.783707" level="INFO">Mensagem de status: {'email': 'email deve ser um email válido'}</msg>
+<arg>Mensagem de status: ${response.json()}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.783533" elapsed="0.000207"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.783781" elapsed="0.000146"/>
+</kw>
+<arg>user_wout_arroba</arg>
+<arg>teste.com</arg>
+<status status="PASS" start="2025-09-12T12:46:33.775640" elapsed="0.008311"/>
+</kw>
+<status status="PASS" start="2025-09-12T12:46:33.775474" elapsed="0.008538"/>
+</test>
+<test id="s1-s3-s1-t10" name="Criar Novo Usuário - Email Sem Ponto Com" line="93">
+<kw name="Criar Novo Usuário">
+<kw name="Criar DataMass de Novo Usuário Dinâmico">
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.784499" level="INFO">${FIRSTNAME} = Joseph</msg>
+<var>${FIRSTNAME}</var>
+<status status="PASS" start="2025-09-12T12:46:33.784417" elapsed="0.000091"/>
+</kw>
+<kw name="Email" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.784653" level="INFO">${EMAIL} = jacksonphillip@example.org</msg>
+<var>${EMAIL}</var>
+<status status="PASS" start="2025-09-12T12:46:33.784537" elapsed="0.000123"/>
+</kw>
+<kw name="Password" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.784737" level="INFO">${PASSWORD} = +6O#*ObmqI</msg>
+<var>${PASSWORD}</var>
+<doc>Generate a random password of the specified ``length``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.784689" elapsed="0.000055"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.784810" level="INFO">${list} = ['true', 'false']</msg>
+<var>${list}</var>
+<arg>true</arg>
+<arg>false</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.784775" elapsed="0.000042"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.784945" level="INFO">${ADM} = false</msg>
+<var>${ADM}</var>
+<arg>${list}</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.784847" elapsed="0.000106"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.785094" level="INFO">${DYNAMICPAYLOAD} = {'nome': 'Joseph', 'email': 'jacksonphillip@example.org', 'password': '+6O#*ObmqI', 'administrador': 'false'}</msg>
+<var>${DYNAMICPAYLOAD}</var>
+<arg>nome=${FIRSTNAME}</arg>
+<arg>email=${EMAIL}</arg>
+<arg>password=${PASSWORD}</arg>
+<arg>administrador=${ADM}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.784988" elapsed="0.000114"/>
+</kw>
+<return>
+<value>${DYNAMICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.785121" elapsed="0.000016"/>
+</return>
+<msg time="2025-09-12T12:46:33.785179" level="INFO">${dynamic} = {'nome': 'Joseph', 'email': 'jacksonphillip@example.org', 'password': '+6O#*ObmqI', 'administrador': 'false'}</msg>
+<var>${dynamic}</var>
+<status status="PASS" start="2025-09-12T12:46:33.784355" elapsed="0.000832"/>
+</kw>
+<if>
+<branch type="IF" condition="'${domain}' != ''">
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.785320" level="INFO">${nome} = Barbara</msg>
+<var>${nome}</var>
+<status status="PASS" start="2025-09-12T12:46:33.785263" elapsed="0.000064"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.785407" level="INFO">${email} = Barbara@teste</msg>
+<var>${email}</var>
+<arg>${nome}${domain}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.785357" elapsed="0.000057"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${dynamic}</arg>
+<arg>email=${email}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.785443" elapsed="0.000049"/>
+</kw>
+<status status="PASS" start="2025-09-12T12:46:33.785210" elapsed="0.000293"/>
+</branch>
+<status status="PASS" start="2025-09-12T12:46:33.785203" elapsed="0.000309"/>
+</if>
+<kw name="Criar DataMass de Novo Usuário Estatico">
+<kw name="Importar JSON estático" owner="config">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-09-12T12:46:33.785856" level="INFO">${data} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${data}</var>
+<arg>${EXECDIR}/resources/${nome_arquivo}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.785697" elapsed="0.000168"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-09-12T12:46:33.785879" elapsed="0.000009"/>
+</return>
+<msg time="2025-09-12T12:46:33.785923" level="INFO">${json} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${json}</var>
+<arg>user.json</arg>
+<status status="PASS" start="2025-09-12T12:46:33.785635" elapsed="0.000297"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.786347" level="INFO">${STATICPAYLOAD} = {}</msg>
+<var>${STATICPAYLOAD}</var>
+<arg>${json["${testcase}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.785967" elapsed="0.000389"/>
+</kw>
+<return>
+<value>${STATICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.786372" elapsed="0.000010"/>
+</return>
+<msg time="2025-09-12T12:46:33.786452" level="INFO">${static} = {}</msg>
+<var>${static}</var>
+<arg>${testcase}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.785551" elapsed="0.000909"/>
+</kw>
+<kw name="Copy Dictionary" owner="Collections">
+<msg time="2025-09-12T12:46:33.786548" level="INFO">${body} = {'nome': 'Joseph', 'email': 'Barbara@teste', 'password': '+6O#*ObmqI', 'administrador': 'false'}</msg>
+<var>${body}</var>
+<arg>${dynamic}</arg>
+<doc>Returns a copy of the given dictionary.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.786494" elapsed="0.000062"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${body}</arg>
+<arg>&amp;{static}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.786625" elapsed="0.000076"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nPayload: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.786737" elapsed="0.000088"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.786908" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.786865" elapsed="0.000105"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.790948" level="INFO">POST Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '96', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Joseph", "email": "Barbara@teste", "password": "+6O#*ObmqI", "administrador": "false"}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.790995" level="INFO">POST Response : url=http://localhost:3000/usuarios 
+ status=400, reason=Bad Request 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '50', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "email": "email deve ser um email válido"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.791061" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/usuarios</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.787006" elapsed="0.004065"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Validar Falha No Cadastro">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.791651" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.791493" elapsed="0.000180"/>
+</kw>
+<arg>Should Be Equal As Integers</arg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.791452" elapsed="0.000246"/>
+</kw>
+<arg>${response}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.791354" elapsed="0.000365"/>
+</kw>
+<arg>'${testcase}' == 'user_valido'</arg>
+<arg>Validar Sucesso No Cadastro</arg>
+<arg>${response}</arg>
+<arg>ELSE IF</arg>
+<arg>'${testcase}' != 'user_valido'</arg>
+<arg>Validar Falha No Cadastro</arg>
+<arg>${response}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.791173" elapsed="0.000561"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.791945" level="INFO">Mensagem de status: {'email': 'email deve ser um email válido'}</msg>
+<arg>Mensagem de status: ${response.json()}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.791775" elapsed="0.000202"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.792017" elapsed="0.000139"/>
+</kw>
+<arg>user_wout_com</arg>
+<arg>@teste</arg>
+<status status="PASS" start="2025-09-12T12:46:33.784250" elapsed="0.007927"/>
+</kw>
+<status status="PASS" start="2025-09-12T12:46:33.784085" elapsed="0.008150"/>
+</test>
+<test id="s1-s3-s1-t11" name="Criar Novo Usuário - Senha Com Menos De Cinco Caracteres" line="96">
+<kw name="Criar Novo Usuário">
+<kw name="Criar DataMass de Novo Usuário Dinâmico">
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.792841" level="INFO">${FIRSTNAME} = Kevin</msg>
+<var>${FIRSTNAME}</var>
+<status status="PASS" start="2025-09-12T12:46:33.792750" elapsed="0.000100"/>
+</kw>
+<kw name="Email" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.792981" level="INFO">${EMAIL} = sphillips@example.org</msg>
+<var>${EMAIL}</var>
+<status status="PASS" start="2025-09-12T12:46:33.792880" elapsed="0.000108"/>
+</kw>
+<kw name="Password" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.793074" level="INFO">${PASSWORD} = 8LkLIb^5)8</msg>
+<var>${PASSWORD}</var>
+<doc>Generate a random password of the specified ``length``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.793019" elapsed="0.000064"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.793154" level="INFO">${list} = ['true', 'false']</msg>
+<var>${list}</var>
+<arg>true</arg>
+<arg>false</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.793116" elapsed="0.000045"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.793304" level="INFO">${ADM} = true</msg>
+<var>${ADM}</var>
+<arg>${list}</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.793192" elapsed="0.000120"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.793462" level="INFO">${DYNAMICPAYLOAD} = {'nome': 'Kevin', 'email': 'sphillips@example.org', 'password': '8LkLIb^5)8', 'administrador': 'true'}</msg>
+<var>${DYNAMICPAYLOAD}</var>
+<arg>nome=${FIRSTNAME}</arg>
+<arg>email=${EMAIL}</arg>
+<arg>password=${PASSWORD}</arg>
+<arg>administrador=${ADM}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.793346" elapsed="0.000125"/>
+</kw>
+<return>
+<value>${DYNAMICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.793489" elapsed="0.000015"/>
+</return>
+<msg time="2025-09-12T12:46:33.793546" level="INFO">${dynamic} = {'nome': 'Kevin', 'email': 'sphillips@example.org', 'password': '8LkLIb^5)8', 'administrador': 'true'}</msg>
+<var>${dynamic}</var>
+<status status="PASS" start="2025-09-12T12:46:33.792680" elapsed="0.000873"/>
+</kw>
+<if>
+<branch type="IF" condition="'${domain}' != ''">
+<kw name="First Name" owner="FakerLibrary">
+<var>${nome}</var>
+<status status="NOT RUN" start="2025-09-12T12:46:33.793629" elapsed="0.000006"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${email}</var>
+<arg>${nome}${domain}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-09-12T12:46:33.793662" elapsed="0.000006"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${dynamic}</arg>
+<arg>email=${email}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="NOT RUN" start="2025-09-12T12:46:33.793706" elapsed="0.000005"/>
+</kw>
+<status status="NOT RUN" start="2025-09-12T12:46:33.793577" elapsed="0.000143"/>
+</branch>
+<status status="PASS" start="2025-09-12T12:46:33.793569" elapsed="0.000159"/>
+</if>
+<kw name="Criar DataMass de Novo Usuário Estatico">
+<kw name="Importar JSON estático" owner="config">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-09-12T12:46:33.794102" level="INFO">${data} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${data}</var>
+<arg>${EXECDIR}/resources/${nome_arquivo}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.793928" elapsed="0.000213"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-09-12T12:46:33.794160" elapsed="0.000011"/>
+</return>
+<msg time="2025-09-12T12:46:33.794428" level="INFO">${json} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${json}</var>
+<arg>user.json</arg>
+<status status="PASS" start="2025-09-12T12:46:33.793865" elapsed="0.000605"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.795205" level="INFO">${STATICPAYLOAD} = {'password': '123'}</msg>
+<var>${STATICPAYLOAD}</var>
+<arg>${json["${testcase}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.794599" elapsed="0.000641"/>
+</kw>
+<return>
+<value>${STATICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.795296" elapsed="0.000031"/>
+</return>
+<msg time="2025-09-12T12:46:33.795439" level="INFO">${static} = {'password': '123'}</msg>
+<var>${static}</var>
+<arg>${testcase}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.793766" elapsed="0.001691"/>
+</kw>
+<kw name="Copy Dictionary" owner="Collections">
+<msg time="2025-09-12T12:46:33.796266" level="INFO">${body} = {'nome': 'Kevin', 'email': 'sphillips@example.org', 'password': '8LkLIb^5)8', 'administrador': 'true'}</msg>
+<var>${body}</var>
+<arg>${dynamic}</arg>
+<doc>Returns a copy of the given dictionary.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.795882" elapsed="0.000422"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${body}</arg>
+<arg>&amp;{static}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.796398" elapsed="0.000081"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nPayload: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.796517" elapsed="0.000068"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.796670" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.796626" elapsed="0.000121"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.800459" level="INFO">POST Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '95', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Kevin", "email": "sphillips@example.org", "password": "123", "administrador": "true"}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.800494" level="INFO">POST Response : url=http://localhost:3000/usuarios 
+ status=201, reason=Created 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '82', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "Xg0rJak4VPRSKLH7"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.800547" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/usuarios</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.796784" elapsed="0.003773"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Validar Falha No Cadastro">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.801052" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2025-09-12T12:46:33.801089" level="FAIL">201 != 400</msg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="FAIL" start="2025-09-12T12:46:33.800917" elapsed="0.000201">201 != 400</status>
+</kw>
+<arg>Should Be Equal As Integers</arg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="FAIL" start="2025-09-12T12:46:33.800878" elapsed="0.000263">201 != 400</status>
+</kw>
+<arg>${response}</arg>
+<status status="FAIL" start="2025-09-12T12:46:33.800780" elapsed="0.000393">201 != 400</status>
+</kw>
+<arg>'${testcase}' == 'user_valido'</arg>
+<arg>Validar Sucesso No Cadastro</arg>
+<arg>${response}</arg>
+<arg>ELSE IF</arg>
+<arg>'${testcase}' != 'user_valido'</arg>
+<arg>Validar Falha No Cadastro</arg>
+<arg>${response}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-09-12T12:46:33.800622" elapsed="0.000564">201 != 400</status>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.801375" level="INFO">Mensagem de status: {'message': 'Cadastro realizado com sucesso', '_id': 'Xg0rJak4VPRSKLH7'}</msg>
+<arg>Mensagem de status: ${response.json()}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.801220" elapsed="0.000179"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.801439" elapsed="0.000133"/>
+</kw>
+<arg>user_password_less_five</arg>
+<status status="FAIL" start="2025-09-12T12:46:33.792476" elapsed="0.009132">201 != 400</status>
+</kw>
+<status status="FAIL" start="2025-09-12T12:46:33.792307" elapsed="0.009367">201 != 400</status>
+</test>
+<test id="s1-s3-s1-t12" name="Criar Novo Usuário - Senha Com Mais De Dez Caracteres" line="99">
+<kw name="Criar Novo Usuário">
+<kw name="Criar DataMass de Novo Usuário Dinâmico">
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.802215" level="INFO">${FIRSTNAME} = Nancy</msg>
+<var>${FIRSTNAME}</var>
+<status status="PASS" start="2025-09-12T12:46:33.802139" elapsed="0.000083"/>
+</kw>
+<kw name="Email" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.802336" level="INFO">${EMAIL} = xshelton@example.org</msg>
+<var>${EMAIL}</var>
+<status status="PASS" start="2025-09-12T12:46:33.802248" elapsed="0.000094"/>
+</kw>
+<kw name="Password" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.802411" level="INFO">${PASSWORD} = ^1BEh9yTPA</msg>
+<var>${PASSWORD}</var>
+<doc>Generate a random password of the specified ``length``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.802368" elapsed="0.000050"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.802480" level="INFO">${list} = ['true', 'false']</msg>
+<var>${list}</var>
+<arg>true</arg>
+<arg>false</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.802446" elapsed="0.000041"/>
+</kw>
+<kw name="Random Element" owner="FakerLibrary">
+<msg time="2025-09-12T12:46:33.802612" level="INFO">${ADM} = false</msg>
+<var>${ADM}</var>
+<arg>${list}</arg>
+<doc>Generate a randomly sampled object from ``elements``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.802515" elapsed="0.000106"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.802800" level="INFO">${DYNAMICPAYLOAD} = {'nome': 'Nancy', 'email': 'xshelton@example.org', 'password': '^1BEh9yTPA', 'administrador': 'false'}</msg>
+<var>${DYNAMICPAYLOAD}</var>
+<arg>nome=${FIRSTNAME}</arg>
+<arg>email=${EMAIL}</arg>
+<arg>password=${PASSWORD}</arg>
+<arg>administrador=${ADM}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.802688" elapsed="0.000121"/>
+</kw>
+<return>
+<value>${DYNAMICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.802829" elapsed="0.000023"/>
+</return>
+<msg time="2025-09-12T12:46:33.802919" level="INFO">${dynamic} = {'nome': 'Nancy', 'email': 'xshelton@example.org', 'password': '^1BEh9yTPA', 'administrador': 'false'}</msg>
+<var>${dynamic}</var>
+<status status="PASS" start="2025-09-12T12:46:33.802082" elapsed="0.000847"/>
+</kw>
+<if>
+<branch type="IF" condition="'${domain}' != ''">
+<kw name="First Name" owner="FakerLibrary">
+<var>${nome}</var>
+<status status="NOT RUN" start="2025-09-12T12:46:33.803026" elapsed="0.000007"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${email}</var>
+<arg>${nome}${domain}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-09-12T12:46:33.803064" elapsed="0.000006"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${dynamic}</arg>
+<arg>email=${email}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="NOT RUN" start="2025-09-12T12:46:33.803099" elapsed="0.000005"/>
+</kw>
+<status status="NOT RUN" start="2025-09-12T12:46:33.802958" elapsed="0.000155"/>
+</branch>
+<status status="PASS" start="2025-09-12T12:46:33.802950" elapsed="0.000171"/>
+</if>
+<kw name="Criar DataMass de Novo Usuário Estatico">
+<kw name="Importar JSON estático" owner="config">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-09-12T12:46:33.803529" level="INFO">${data} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${data}</var>
+<arg>${EXECDIR}/resources/${nome_arquivo}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.803333" elapsed="0.000207"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-09-12T12:46:33.803559" elapsed="0.000010"/>
+</return>
+<msg time="2025-09-12T12:46:33.803610" level="INFO">${json} = {'user_valido': {}, 'user_blank_name': {'nome': ''}, 'user_blank_email': {'email': ''}, 'user_blank_password': {'password': ''}, 'user_blank_admin': {'administrador': ''}, 'user_repeat_email': {'email...</msg>
+<var>${json}</var>
+<arg>user.json</arg>
+<status status="PASS" start="2025-09-12T12:46:33.803259" elapsed="0.000380"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.803935" level="INFO">${STATICPAYLOAD} = {'password': 'senhamuitissimogrande'}</msg>
+<var>${STATICPAYLOAD}</var>
+<arg>${json["${testcase}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.803721" elapsed="0.000229"/>
+</kw>
+<return>
+<value>${STATICPAYLOAD}</value>
+<status status="PASS" start="2025-09-12T12:46:33.803971" elapsed="0.000011"/>
+</return>
+<msg time="2025-09-12T12:46:33.804027" level="INFO">${static} = {'password': 'senhamuitissimogrande'}</msg>
+<var>${static}</var>
+<arg>${testcase}</arg>
+<status status="PASS" start="2025-09-12T12:46:33.803166" elapsed="0.000869"/>
+</kw>
+<kw name="Copy Dictionary" owner="Collections">
+<msg time="2025-09-12T12:46:33.804130" level="INFO">${body} = {'nome': 'Nancy', 'email': 'xshelton@example.org', 'password': '^1BEh9yTPA', 'administrador': 'false'}</msg>
+<var>${body}</var>
+<arg>${dynamic}</arg>
+<doc>Returns a copy of the given dictionary.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.804073" elapsed="0.000065"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${body}</arg>
+<arg>&amp;{static}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.804175" elapsed="0.000059"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nPayload: ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.804267" elapsed="0.000055"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.804400" level="INFO">Creating Session using : alias=severest, url=http://localhost:3000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>severest</arg>
+<arg>${BASEURL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T12:46:33.804360" elapsed="0.000091"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T12:46:33.807697" level="INFO">POST Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '113', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Nancy", "email": "xshelton@example.org", "password": "senhamuitissimogrande", "administrador": "false"}' 
+ </msg>
+<msg time="2025-09-12T12:46:33.807733" level="INFO">POST Response : url=http://localhost:3000/usuarios 
+ status=201, reason=Created 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '82', 'Date': 'Fri, 12 Sep 2025 15:46:33 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "tcGfuX5l76IyLnHJ"
+} 
+ </msg>
+<msg time="2025-09-12T12:46:33.807781" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>severest</arg>
+<arg>/usuarios</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.804488" elapsed="0.003303"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Validar Falha No Cadastro">
+<kw name="Run Keyword And Continue On Failure" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.808302" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2025-09-12T12:46:33.808345" level="FAIL">201 != 400</msg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="FAIL" start="2025-09-12T12:46:33.808149" elapsed="0.000225">201 != 400</status>
+</kw>
+<arg>Should Be Equal As Integers</arg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="FAIL" start="2025-09-12T12:46:33.808109" elapsed="0.000287">201 != 400</status>
+</kw>
+<arg>${response}</arg>
+<status status="FAIL" start="2025-09-12T12:46:33.808008" elapsed="0.000422">201 != 400</status>
+</kw>
+<arg>'${testcase}' == 'user_valido'</arg>
+<arg>Validar Sucesso No Cadastro</arg>
+<arg>${response}</arg>
+<arg>ELSE IF</arg>
+<arg>'${testcase}' != 'user_valido'</arg>
+<arg>Validar Falha No Cadastro</arg>
+<arg>${response}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-09-12T12:46:33.807856" elapsed="0.000587">201 != 400</status>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-12T12:46:33.808668" level="INFO">Mensagem de status: {'message': 'Cadastro realizado com sucesso', '_id': 'tcGfuX5l76IyLnHJ'}</msg>
+<arg>Mensagem de status: ${response.json()}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.808512" elapsed="0.000179"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T12:46:33.808730" elapsed="0.000141"/>
+</kw>
+<arg>user_password_more_ten</arg>
+<status status="FAIL" start="2025-09-12T12:46:33.801908" elapsed="0.007001">201 != 400</status>
+</kw>
+<status status="FAIL" start="2025-09-12T12:46:33.801748" elapsed="0.007228">201 != 400</status>
+</test>
+<status status="FAIL" start="2025-09-12T12:46:33.698873" elapsed="0.110214"/>
+</suite>
+<status status="FAIL" start="2025-09-12T12:46:33.698481" elapsed="0.110787"/>
+</suite>
+<status status="FAIL" start="2025-09-12T12:46:33.485824" elapsed="0.323611"/>
+</suite>
+<statistics>
+<total>
+<stat pass="13" fail="6" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="ServeRest" id="s1" pass="13" fail="6" skip="0">ServeRest</stat>
+<stat name="Resources" id="s1-s1" pass="1" fail="0" skip="0">ServeRest.Resources</stat>
+<stat name="Token" id="s1-s1-s1" pass="1" fail="0" skip="0">ServeRest.Resources.Token</stat>
+<stat name="Test Login" id="s1-s2" pass="4" fail="2" skip="0">ServeRest.Test Login</stat>
+<stat name="Post Login Test" id="s1-s2-s1" pass="4" fail="2" skip="0">ServeRest.Test Login.Post Login Test</stat>
+<stat name="Test Usuarios" id="s1-s3" pass="8" fail="4" skip="0">ServeRest.Test Usuarios</stat>
+<stat name="Post Usuarios Test" id="s1-s3-s1" pass="8" fail="4" skip="0">ServeRest.Test Usuarios.Post Usuarios Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
