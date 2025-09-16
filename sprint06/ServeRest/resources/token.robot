@@ -24,8 +24,3 @@ Log do Bearer Token
     ${TOKEN}    Gerar Novo Token
     Log To Console    ${TOKEN}
 
-*** Test Cases ***
-
-Teste de Token
-    Gerar Novo Token
-    Log do Bearer Token
