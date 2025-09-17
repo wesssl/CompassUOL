@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.7 on darwin)" generated="2025-09-17T14:40:09.170847" rpa="false" schemaversion="5">
+<suite id="s1" name="Signup" source="/Users/wesleylima/Documents/CompassUOL/sprint07/testes_mark85/signup.robot">
+<test id="s1-t1" name="Deve poder cadastrar um novo usuário" line="14">
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2025-09-17T14:40:09.319961" level="INFO">${NAME} = Daniel</msg>
+<var>${NAME}</var>
+<status status="PASS" start="2025-09-17T14:40:09.319827" elapsed="0.000149"/>
+</kw>
+<kw name="Email" owner="FakerLibrary">
+<msg time="2025-09-17T14:40:09.320173" level="INFO">${EMAIL} = maria36@example.com</msg>
+<var>${EMAIL}</var>
+<status status="PASS" start="2025-09-17T14:40:09.320050" elapsed="0.000136"/>
+</kw>
+<kw name="Password" owner="FakerLibrary">
+<msg time="2025-09-17T14:40:09.320314" level="INFO">${PASSWORD} = K@V3r6Qbp8</msg>
+<var>${PASSWORD}</var>
+<doc>Generate a random password of the specified ``length``.</doc>
+<status status="PASS" start="2025-09-17T14:40:09.320241" elapsed="0.000084"/>
+</kw>
+<kw name="New Browser" owner="Browser">
+<msg time="2025-09-17T14:40:09.320629" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/Users/wesleylima/Documents/CompassUOL/sprint07/testes_mark85/logs/browser/traces/temp/abd84140-53ba-43b0-ad89-d67670fa0720"}</msg>
+<msg time="2025-09-17T14:40:09.332043" level="INFO">Starting Browser process /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/Browser/wrapper/index.js using at 127.0.0.1:51206</msg>
+<msg time="2025-09-17T14:40:11.156496" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/Users/wesleylima/Documents/CompassUOL/sprint07/testes_mark85/logs/browser/traces/temp/abd84140-53ba-43b0-ad89-d67670fa0720"}</msg>
+<arg>browser=chromium</arg>
+<arg>headless=false</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-09-17T14:40:09.320376" elapsed="1.836373"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-09-17T14:40:12.123439" level="INFO">Successfully initialized new page object and opened url: http://localhost:3000/signup</msg>
+<msg time="2025-09-17T14:40:12.123729" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>http://localhost:3000/signup</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-09-17T14:40:11.157304" elapsed="0.966770"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-09-17T14:40:12.147826" level="INFO">Waited for Element with selector xpath=//h1 at state visible</msg>
+<arg>xpath=//h1</arg>
+<arg>visible</arg>
+<arg>3</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-09-17T14:40:12.124775" elapsed="0.023156"/>
+</kw>
+<kw name="Get Text" owner="Browser">
+<msg time="2025-09-17T14:40:12.162526" level="INFO">Text: 'Faça seu cadastro'</msg>
+<arg>xpath=//h1</arg>
+<arg>equals</arg>
+<arg>Faça seu cadastro</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<status status="PASS" start="2025-09-17T14:40:12.148094" elapsed="0.014514"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-09-17T14:40:12.163107" level="INFO">Fills the text 'Daniel' in the given field.</msg>
+<arg>xpath=//*[@id="name"]</arg>
+<arg>${NAME}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-09-17T14:40:12.162762" elapsed="0.009696"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-09-17T14:40:12.172949" level="INFO">Fills the text 'maria36@example.com' in the given field.</msg>
+<arg>xpath=//*[@id="email"]</arg>
+<arg>${EMAIL}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-09-17T14:40:12.172618" elapsed="0.008840"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-09-17T14:40:12.181935" level="INFO">Fills the text 'K@V3r6Qbp8' in the given field.</msg>
+<arg>xpath=//*[@id="password"]</arg>
+<arg>${PASSWORD}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-09-17T14:40:12.181624" elapsed="0.004071"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2025-09-17T14:40:12.186042" level="INFO">Clicks the element 'id=buttonSignup'.</msg>
+<arg>id=buttonSignup</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-09-17T14:40:12.185818" elapsed="0.036349"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-09-17T14:40:12.400290" level="INFO">Waited for Element with selector xpath=//*[@class="notice success"] at state visible</msg>
+<arg>xpath=//*[@class="notice success"]</arg>
+<arg>visible</arg>
+<arg>3</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-09-17T14:40:12.222322" elapsed="0.178102"/>
+</kw>
+<kw name="Get Text" owner="Browser">
+<msg time="2025-09-17T14:40:12.406910" level="INFO">Text: 'Boas vindas ao Mark85, o seu gerenciador de tarefas.'</msg>
+<arg>xpath=//*[@class="notice success"]</arg>
+<arg>equals</arg>
+<arg>Boas vindas ao Mark85, o seu gerenciador de tarefas.</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<status status="PASS" start="2025-09-17T14:40:12.400623" elapsed="0.006365"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-17T14:40:17.408609" level="INFO">Slept 5 seconds.</msg>
+<arg>5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-17T14:40:12.407148" elapsed="5.001801"/>
+</kw>
+<kw name="Close Browser" owner="Browser">
+<msg time="2025-09-17T14:40:17.547727" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-09-17T14:40:17.409813" elapsed="0.138012"/>
+</kw>
+<status status="PASS" start="2025-09-17T14:40:09.319321" elapsed="8.228667"/>
+</test>
+<status status="PASS" start="2025-09-17T14:40:09.171308" elapsed="8.378709"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Signup" id="s1" pass="1" fail="0" skip="0">Signup</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

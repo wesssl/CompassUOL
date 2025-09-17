@@ -1,0 +1,75 @@
+{"level":30,"time":"2025-09-17T17:40:09.574Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Listening on 127.0.0.1:51206"}
+(node:34306) DeprecationWarning: Calling start() is no longer necessary. It can be safely omitted.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+{"level":30,"time":"2025-09-17T17:40:10.674Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Start of node method newBrowser"}
+{"level":30,"time":"2025-09-17T17:40:11.155Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Adding browser to stack: chromium, version: 140.0.7339.16"}
+{"level":30,"time":"2025-09-17T17:40:11.155Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"End of node method newBrowser"}
+{"level":30,"time":"2025-09-17T17:40:11.155Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Adding 0 contexts to browser"}
+{"level":30,"time":"2025-09-17T17:40:11.159Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Start of node method newPage"}
+{"level":30,"time":"2025-09-17T17:40:11.159Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"currentBrowser: {\"name\":\"chromium\",\"browser\":{\"_type\":\"Browser\",\"_guid\":\"browser@9756d337d423526970ed2f8a42fc6200\"},\"headless\":false,\"_contextStack\":[],\"id\":\"browser=e33a51d5-1be0-4ba6-a30b-5d666c93f88a\"}"}
+{"level":30,"time":"2025-09-17T17:40:11.179Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Setting default timeout for context context=3879ea51-30be-43a0-a68f-035e8a2a978d to 10000"}
+{"level":30,"time":"2025-09-17T17:40:11.179Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Changed active context: context=3879ea51-30be-43a0-a68f-035e8a2a978d"}
+{"level":30,"time":"2025-09-17T17:40:11.527Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Video path: undefined"}
+{"level":30,"time":"2025-09-17T17:40:11.527Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Changed active page"}
+{"level":30,"time":"2025-09-17T17:40:12.121Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"End of node method newPage"}
+{"level":30,"time":"2025-09-17T17:40:12.128Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2025-09-17T17:40:12.129Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Strict mode is enabled, find Locator with xpath=//h1 in page."}
+{"level":30,"time":"2025-09-17T17:40:12.147Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2025-09-17T17:40:12.149Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Start of node method getText"}
+{"level":30,"time":"2025-09-17T17:40:12.149Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Strict mode is enabled, find Locator with xpath=//h1 in page."}
+{"level":30,"time":"2025-09-17T17:40:12.161Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Retrieved text for element xpath=//h1 containing Faça seu cadastro"}
+{"level":30,"time":"2025-09-17T17:40:12.161Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"End of node method getText"}
+{"level":30,"time":"2025-09-17T17:40:12.163Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Start of node method fillText"}
+{"level":30,"time":"2025-09-17T17:40:12.163Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Strict mode is enabled, find Locator with xpath=//*[@id=\"name\"] in page."}
+{"level":30,"time":"2025-09-17T17:40:12.171Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"End of node method fillText"}
+{"level":30,"time":"2025-09-17T17:40:12.173Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Start of node method fillText"}
+{"level":30,"time":"2025-09-17T17:40:12.173Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Strict mode is enabled, find Locator with xpath=//*[@id=\"email\"] in page."}
+{"level":30,"time":"2025-09-17T17:40:12.180Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"End of node method fillText"}
+{"level":30,"time":"2025-09-17T17:40:12.182Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Start of node method fillText"}
+{"level":30,"time":"2025-09-17T17:40:12.182Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Strict mode is enabled, find Locator with xpath=//*[@id=\"password\"] in page."}
+{"level":30,"time":"2025-09-17T17:40:12.185Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"End of node method fillText"}
+{"level":30,"time":"2025-09-17T17:40:12.186Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Start of node method click"}
+{"level":30,"time":"2025-09-17T17:40:12.186Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Strict mode is enabled, find Locator with id=buttonSignup in page."}
+{"level":30,"time":"2025-09-17T17:40:12.221Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"End of node method click"}
+{"level":30,"time":"2025-09-17T17:40:12.223Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2025-09-17T17:40:12.223Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Strict mode is enabled, find Locator with xpath=//*[@class=\"notice success\"] in page."}
+{"level":30,"time":"2025-09-17T17:40:12.399Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2025-09-17T17:40:12.401Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Start of node method getText"}
+{"level":30,"time":"2025-09-17T17:40:12.401Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Strict mode is enabled, find Locator with xpath=//*[@class=\"notice success\"] in page."}
+{"level":30,"time":"2025-09-17T17:40:12.406Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Retrieved text for element xpath=//*[@class=\"notice success\"] containing Boas vindas ao Mark85, o seu gerenciador de tarefas."}
+{"level":30,"time":"2025-09-17T17:40:12.406Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"End of node method getText"}
+{"level":30,"time":"2025-09-17T17:40:17.414Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Start of node method closeBrowser"}
+{"level":30,"time":"2025-09-17T17:40:17.432Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Removed page=6944ec5d-cf45-435f-89e7-9a6cb6cfc512 from context=3879ea51-30be-43a0-a68f-035e8a2a978d page stack"}
+{"level":30,"time":"2025-09-17T17:40:17.547Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"End of node method closeBrowser"}
+================= Original suppressed error =================
+Error: Browser has been closed.
+    at PlaywrightState.getActiveBrowser (/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/Browser/wrapper/index.js:12227:15)
+    at PlaywrightServer.getActiveBrowser (/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/Browser/wrapper/index.js:13124:59)
+    at PlaywrightServer.setTimeout (/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/Browser/wrapper/index.js:13372:57)
+    at Object.onReceiveHalfClose (/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/Browser/wrapper/node_modules/@grpc/grpc-js/build/src/server.js:1461:25)
+    at BaseServerInterceptingCall.maybePushNextMessage (/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/Browser/wrapper/node_modules/@grpc/grpc-js/build/src/server-interceptors.js:575:31)
+    at BaseServerInterceptingCall.handleEndEvent (/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/Browser/wrapper/node_modules/@grpc/grpc-js/build/src/server-interceptors.js:615:14)
+    at ServerHttp2Stream.<anonymous> (/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/Browser/wrapper/node_modules/@grpc/grpc-js/build/src/server-interceptors.js:382:18)
+    at ServerHttp2Stream.emit (node:events:530:35)
+    at endReadableNT (node:internal/streams/readable:1698:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+=============================================================
+{"level":30,"time":"2025-09-17T17:40:17.549Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-09-17T17:40:17.549Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"End of node method getBrowserCatalog"}
+================= Original suppressed error =================
+Error: Browser has been closed.
+    at PlaywrightState.getActiveBrowser (/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/Browser/wrapper/index.js:12227:15)
+    at PlaywrightServer.getActiveBrowser (/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/Browser/wrapper/index.js:13124:59)
+    at PlaywrightServer.setTimeout (/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/Browser/wrapper/index.js:13372:57)
+    at Object.onReceiveHalfClose (/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/Browser/wrapper/node_modules/@grpc/grpc-js/build/src/server.js:1461:25)
+    at BaseServerInterceptingCall.maybePushNextMessage (/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/Browser/wrapper/node_modules/@grpc/grpc-js/build/src/server-interceptors.js:575:31)
+    at BaseServerInterceptingCall.handleEndEvent (/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/Browser/wrapper/node_modules/@grpc/grpc-js/build/src/server-interceptors.js:615:14)
+    at ServerHttp2Stream.<anonymous> (/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/Browser/wrapper/node_modules/@grpc/grpc-js/build/src/server-interceptors.js:382:18)
+    at ServerHttp2Stream.emit (node:events:530:35)
+    at endReadableNT (node:internal/streams/readable:1698:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+=============================================================
+{"level":30,"time":"2025-09-17T17:40:17.551Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-09-17T17:40:17.551Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-09-17T17:40:17.562Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"Start of node method closeAllBrowsers"}
+{"level":30,"time":"2025-09-17T17:40:17.562Z","pid":34306,"hostname":"Wesleys-MacBook-Air.local","msg":"End of node method closeAllBrowsers"}
